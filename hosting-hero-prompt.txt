@@ -1,0 +1,65 @@
+HOSTING HERO SECTION IMAGE PROMPT
+
+Create a sophisticated, modern illustration for the IEP Schools hosting hero section. The image should visualize "Your Dedicated School Hosting Environment" as featured on the hosting page.
+
+KEY ELEMENTS TO INCLUDE:
+
+1. CENTRAL FOCUS: A stylized, semi-transparent cloud or server infrastructure glowing with soft purple/amber lighting (matching IEP Schools' purple brand theme)
+2. SCHOOL CONTEXT: Silhouettes or minimal line-art representations of:
+   - A school building/chalets in the background
+   - Abstract figures representing principals, teachers, and parents
+   - Mobile device icons showing web & mobile access
+3. TECHNOLOGY VISUALIZATION:
+   - Connected nodes or dots representing web, API, database, real-time (Socket.IO)
+   - Lock/key symbol for security (256-bit TLS/HTTPS)
+   - Database (MongoDB) icon integrated subtly
+   - Flow lines showing connection from users to cloud to database
+4. COLOR SCHEME (IEP Schools brand colors):
+   - Primary: Purple/violet gradient (#6738F5, #8B5CF6)
+   - Accent: Emerald/amber highlights (#10B981, #F59E0B)
+   - Dark navy background accents (#070914, #141A3A)
+   - White/light elements for contrast
+5. COMPOSITION:
+   - Horizontal layout suitable for hero section
+   - Left-right balance: infrastructure on one side, school users on other
+   - Depth through layering (foreground, midground, background)
+   - Negative space for overlaying title/text (keep top/bottom areas relatively clean)
+6. STYLE:
+   - Modern flat-vector illustration
+   - Not photorealistic - clean, infographic style
+   - Similar to the existing architecture diagram on the hosting page (steps 1-5)
+   - Sophisticated but not busy - hero section needs readability for overlay text
+   - 16:9 aspect ratio, hero-section optimized
+
+TEXT OVERLAY CONSIDERATIONS (keep these areas relatively clean):
+- Title: "Your School. Your Dedicated Hosting Environment" (centered)
+- Benefits/badges: "₹0 Dedicated Environment", feature badges
+- CTA buttons: "Start Free Environment", "Compare Hosting Tiers"
+
+EXCLUDE:
+- Real school photos or student images
+- Stock photography people
+- Real server room photography
+- Complex technical diagrams with too much detail
+- Any text embedded in the image (add later as overlay)
+
+IDEAS FOR VISUAL METAPHOR:
+- A bird's-eye view of a school campus connected via glowing lines to a central cloud/hub
+- A split composition: left side shows school building/scene, right side shows abstract cloud infrastructure
+- A central glowing orb or pyramid representing the "dedicated environment" with connecting lines to user silhouettes
+- Minimalist network map style with labeled nodes (Users, Server, Database, etc.)
+
+FILE SPECS:
+- Resolution: 1920x1080 minimum (hero section width)
+- Format: PNG with transparency support
+- Style reference: IEP Schools existing architecture diagram (steps 1-5 flow)
+- Must work with purple/violet gradient overlays and white/light text
+
+PROMPT STRUCTURE (for AI image generators like Midjourney, DALL-E, Stable Diffusion):
+
+"Professional flat-vector illustration for school software hosting hero section, dedicated cloud infrastructure for education technology, minimalist design with purple and violet color scheme, IEP Schools branding, showing connected nodes representing web ERP, API service, MongoDB database, Socket.IO real-time channel, and user silhouettes (principals, teachers, parents) connecting via secure TLS/HTTPS connections, clean infographic style, 16:9 aspect ratio, sophisticated but not busy, with negative space for overlay text, modern flat vector art, educational technology theme, no text embedded, no real people photos, no stock imagery, clean lines, subtle glow effects, educational software illustration"
+
+VARIATIONS:
+- Version A: Left-right split (school on left, cloud on right)
+- Version B: Central cloud hub with connecting lines radiating outward
+- VersionC: Top-down view of campus to cloud connection

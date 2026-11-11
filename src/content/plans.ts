@@ -1,0 +1,363 @@
+import type { ComparisonRow, Plan } from "./types";
+
+export const plans: Plan[] = [
+  {
+    id: "free",
+    name: "Free",
+    tagline: "Start with the essentials",
+    monthly: 0,
+    annual: 0,
+    priceNote: "No online checkout. Onboarding is arranged with our team.",
+    cta: "Start with Free",
+    ctaHref: "/contact?plan=free",
+    support: "Standard support",
+    limits: {
+      students: "Up to 200 (proposed)",
+      staff: "10 staff logins (proposed)",
+      storage: "10 GB included",
+      branches: "1 school",
+    },
+    features: [
+      "Included hosting allocation: 6 GB RAM and 10 GB storage",
+      "Unlimited bandwidth, subject to fair use",
+      "Web ERP access",
+      "Core school management modules",
+      "Parent mobile app with limited features",
+      "Standard support",
+    ],
+  },
+  {
+    id: "starter",
+    name: "Starter",
+    tagline: "For growing schools",
+    monthly: 999,
+    annual: 9990,
+    priceNote: "Proposed starting price. Hosting allocation confirmed in your quotation.",
+    cta: "Choose Starter",
+    ctaHref: "/contact?plan=starter",
+    support: "Standard support",
+    limits: {
+      students: "Up to 500 (proposed)",
+      staff: "25 staff logins (proposed)",
+      storage: "25 GB storage (proposed)",
+      branches: "1 school",
+    },
+    features: [
+      "Everything in Free, within Starter limits",
+      "25 GB storage allocation (proposed)",
+      "Up to 500 students and 25 staff logins (proposed)",
+      "Expanded operational reports",
+      "Mobile app access for eligible roles",
+      "Standard support",
+    ],
+  },
+  {
+    id: "professional",
+    name: "Professional",
+    tagline: "For established schools",
+    monthly: 1999,
+    annual: 19990,
+    priceNote: "Proposed starting price. Annual billing is shown as 10 months for 12.",
+    cta: "Choose Professional",
+    ctaHref: "/contact?plan=professional",
+    highlighted: true,
+    support: "Priority support",
+    limits: {
+      students: "Up to 1,500 (proposed)",
+      staff: "75 staff logins (proposed)",
+      storage: "50 GB storage (proposed)",
+      branches: "1 school",
+    },
+    features: [
+      "Everything in Starter, within Professional limits",
+      "Higher hosting allocation and 50 GB storage (proposed)",
+      "Up to 1,500 students and 75 staff logins (proposed)",
+      "Advanced reporting",
+      "More configuration options",
+      "Mobile app access for eligible roles",
+      "Priority support",
+    ],
+  },
+  {
+    id: "enterprise",
+    name: "Enterprise",
+    tagline: "For large campuses",
+    monthly: 3999,
+    annual: 39990,
+    priceNote: "Proposed starting price. Final capacity and support terms are agreed in writing.",
+    cta: "Choose Enterprise",
+    ctaHref: "/contact?plan=enterprise",
+    support: "Enhanced support",
+    limits: {
+      students: "Up to 5,000 (proposed)",
+      staff: "200 staff logins (proposed)",
+      storage: "100 GB storage (proposed)",
+      branches: "1 school",
+    },
+    features: [
+      "Everything in Professional, within Enterprise limits",
+      "Up to 5,000 students and 200 staff logins (proposed)",
+      "Higher hosting capacity",
+      "Advanced school management",
+      "Expanded configuration and reporting",
+      "Mobile app access for eligible roles",
+      "Enhanced support",
+      "Additional integration options, scoped separately",
+    ],
+  },
+  {
+    id: "custom",
+    name: "Custom",
+    tagline: "For requirements beyond the standard plans",
+    monthly: null,
+    annual: null,
+    priceNote: "Quoted after a requirements review. No online checkout.",
+    cta: "Talk to sales",
+    ctaHref: "/contact?plan=custom",
+    support: "Dedicated support arrangements",
+    limits: {
+      students: "Custom",
+      staff: "Custom",
+      storage: "Custom",
+      branches: "Single school today",
+    },
+    features: [
+      "Custom RAM and storage allocation",
+      "Custom user and student capacity",
+      "Custom server configuration",
+      "Custom integrations, scoped separately",
+      "Windows Finance Application licensing when released (planned)",
+      "Dedicated support arrangements",
+    ],
+  },
+];
+
+export const comparisonGroups = [
+  "Core platform",
+  "Usage & hosting",
+  "Applications",
+  "Support & customization",
+] as const;
+
+export const comparisonRows: ComparisonRow[] = [
+  {
+    label: "Web ERP access",
+    group: "Core platform",
+    values: {
+      free: true,
+      starter: true,
+      professional: true,
+      enterprise: true,
+      custom: true,
+    },
+  },
+  {
+    label: "Core school modules",
+    group: "Core platform",
+    values: {
+      free: "Included",
+      starter: "Included",
+      professional: "Included",
+      enterprise: "Included",
+      custom: "Included",
+    },
+  },
+  {
+    label: "Reporting depth",
+    group: "Core platform",
+    values: {
+      free: "Core reports",
+      starter: "Expanded",
+      professional: "Advanced",
+      enterprise: "Advanced",
+      custom: "Scoped",
+    },
+  },
+  {
+    label: "AI features (beta)",
+    group: "Core platform",
+    values: {
+      free: "Not included",
+      starter: "Optional add-on",
+      professional: "Optional add-on",
+      enterprise: "Optional add-on",
+      custom: "Scoped",
+    },
+  },
+  {
+    label: "Students",
+    group: "Usage & hosting",
+    values: {
+      free: "Up to 200",
+      starter: "Up to 500",
+      professional: "Up to 1,500",
+      enterprise: "Up to 5,000",
+      custom: "Custom",
+    },
+  },
+  {
+    label: "Staff logins",
+    group: "Usage & hosting",
+    values: {
+      free: "10",
+      starter: "25",
+      professional: "75",
+      enterprise: "200",
+      custom: "Custom",
+    },
+  },
+  {
+    label: "Included storage",
+    group: "Usage & hosting",
+    values: {
+      free: "10 GB",
+      starter: "25 GB",
+      professional: "50 GB",
+      enterprise: "100 GB",
+      custom: "Custom",
+    },
+  },
+  {
+    label: "RAM allocation",
+    group: "Usage & hosting",
+    values: {
+      free: "6 GB",
+      starter: "Quoted",
+      professional: "Quoted",
+      enterprise: "Quoted",
+      custom: "Custom",
+    },
+  },
+  {
+    label: "Bandwidth",
+    group: "Usage & hosting",
+    values: {
+      free: "Unlimited, fair use",
+      starter: "Unlimited, fair use",
+      professional: "Unlimited, fair use",
+      enterprise: "Unlimited, fair use",
+      custom: "Scoped",
+    },
+  },
+  {
+    label: "School branches",
+    group: "Usage & hosting",
+    values: {
+      free: "1 school",
+      starter: "1 school",
+      professional: "1 school",
+      enterprise: "1 school",
+      custom: "Single school",
+    },
+  },
+  {
+    label: "Parent mobile app",
+    group: "Applications",
+    values: {
+      free: "Limited",
+      starter: "Included",
+      professional: "Included",
+      enterprise: "Included",
+      custom: "Included",
+    },
+  },
+  {
+    label: "Mobile app for other roles",
+    group: "Applications",
+    values: {
+      free: "Not included",
+      starter: "Eligible roles",
+      professional: "Eligible roles",
+      enterprise: "Eligible roles",
+      custom: "Scoped",
+    },
+  },
+  {
+    label: "Windows Finance Application",
+    group: "Applications",
+    values: {
+      free: "Not available",
+      starter: "Planned add-on",
+      professional: "Planned add-on",
+      enterprise: "Planned add-on",
+      custom: "Planned licence",
+    },
+  },
+  {
+    label: "Support level",
+    group: "Support & customization",
+    values: {
+      free: "Standard",
+      starter: "Standard",
+      professional: "Priority",
+      enterprise: "Enhanced",
+      custom: "Dedicated",
+    },
+  },
+  {
+    label: "Onboarding",
+    group: "Support & customization",
+    values: {
+      free: "Guided setup",
+      starter: "Guided setup",
+      professional: "Priority onboarding",
+      enterprise: "Priority onboarding",
+      custom: "Scoped",
+    },
+  },
+  {
+    label: "Configuration & customization",
+    group: "Support & customization",
+    values: {
+      free: "Configuration only",
+      starter: "Configuration only",
+      professional: "Limited configuration",
+      enterprise: "Expanded configuration",
+      custom: "Scoped",
+    },
+  },
+  {
+    label: "Data export",
+    group: "Support & customization",
+    values: {
+      free: true,
+      starter: true,
+      professional: true,
+      enterprise: true,
+      custom: true,
+    },
+  },
+];
+
+export const pricingNotes = [
+  "Prices and limits on this page are proposed starting values. They are not a final quotation and can change after a requirements review.",
+  "Plans are commercial boundaries, not automatic software locks. Module access and limits are configured during onboarding and confirmed in your agreement.",
+  "No plan includes an online payment gateway. Fee payments are recorded in the ERP by school staff.",
+  "Multi-branch consolidation is not available today, on any plan. It is a roadmap item with no confirmed release date.",
+  "The Windows Finance Application is a planned paid add-on. It is not included in any current plan and has no download link.",
+  "Taxes, domain charges and third-party provider costs (SMS, WhatsApp, email, AI) are not included unless stated in your quotation.",
+];
+
+export const addOns = [
+  {
+    name: "Windows Finance Application",
+    status: "Planned paid add-on",
+    description:
+      "A desktop finance application planned for offices that prefer a Windows workspace. It is not released, not downloadable, and not included in any plan today.",
+    availability: "upcoming" as const,
+  },
+  {
+    name: "Mobile app for additional roles",
+    status: "Paid-plan eligibility",
+    description:
+      "The parent app is included on the Free plan with limited features. App access for other roles may be offered on paid plans, subject to role and device support.",
+    availability: "beta" as const,
+  },
+  {
+    name: "Custom development",
+    status: "Quoted per scope",
+    description:
+      "Additional integrations or workflow changes are reviewed individually. Scope, timeline and price are agreed before work begins.",
+    availability: "available" as const,
+  },
+];

@@ -1,0 +1,24 @@
+{
+  "_readme": "Optional public overrides for contact details, pricing, host specs, FAQs and tutorials. Leave a value empty to use the built-in defaults. This file is fetched at runtime; no secrets belong here.",
+  "announcement": "",
+  "erpLoginUrl": "",
+  "contact": {
+    "email": "",
+    "phone": "",
+    "phoneDisplay": "",
+    "whatsapp": "",
+    "location": ""
+  },
+  "pricing": {
+    "annualMonths": 10,
+    "plans": {}
+  },
+  "hostingFree": {
+    "ram": "",
+    "storage": "",
+    "bandwidth": "",
+    "note": ""
+  },
+  "faqs": [],
+  "tutorials": []
+}
