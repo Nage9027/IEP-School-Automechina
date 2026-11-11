@@ -19,9 +19,7 @@ export const site = {
     whatsapp: "https://wa.me/9392528692",
     location: "India",
   },
-  erpLoginUrl:
-    (import.meta.env.VITE_ERP_LOGIN_URL as string | undefined)?.trim() ||
-    "https://sch.iepsolutions.in/login",
+  erpLoginUrl: "https://sch.iepsolutions.in/login",
   announcement:
     "Start with our Free School Automation Plan | Parent Mobile App Included | Explore Plans",
   pricingDisclaimer:
