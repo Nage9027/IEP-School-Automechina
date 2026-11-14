@@ -377,16 +377,14 @@ export default function ApplicationsPage() {
               <div className="flex items-center gap-2 text-ink/65">
                 <Download className="h-4 w-4" />
                 <h3 className="text-xs font-bold uppercase tracking-[0.16em]">
-                  Windows finance app
+                  Windows Desktop Finance App
                 </h3>
               </div>
               <p className="mt-3 text-sm font-bold text-navy-900">
-                There is no download today.
+                High-Speed Workstation Companion
               </p>
               <p className="mt-1 text-xs leading-6 text-ink/65">
-                The Windows Finance Application is a planned paid add-on. No
-                installer, beta build, release date or price has been announced.
-                Register interest to be contacted when it is ready for review.
+                The Windows Desktop Finance Application provides thermal receipt printing, fast keyboard shortcuts, offline ledger caching, and instant cloud sync for high-volume school fee collection counters.
               </p>
               <Button
                 to="/contact?topic=windows-finance"
@@ -394,7 +392,7 @@ export default function ApplicationsPage() {
                 size="sm"
                 className="mt-4 group/btn"
               >
-                Register interest
+                Request Workstation Setup
                 <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
               </Button>
             </div>

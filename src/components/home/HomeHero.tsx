@@ -31,6 +31,13 @@ export interface HeroPlaylistItem {
 
 export const heroVideoPlaylist: HeroPlaylistItem[] = [
   {
+    id: "iep-animation-intro",
+    title: "IEP Schools Animated Introduction",
+    tag: "Platform Animation",
+    src: "/media/iep%20animation%20(2).mp4",
+    description: "Animated introduction to the IEP Schools platform.",
+  },
+  {
     id: "campus-cloud",
     title: "Campus Cloud Automation Tour",
     tag: "Campus Cloud",
@@ -433,7 +440,7 @@ export function HomeHero({ erpLoginUrl, onWatchDemo }: HomeHeroProps) {
                 >
                   {/* 1. Get Started Free: Purple gradient primary */}
                   <Link
-                    to="/contact?plan=free"
+                    to="/contact?plan=free&source=home"
                     className="inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 px-7 py-3.5 text-sm font-bold text-white shadow-[0_4px_25px_rgba(103,56,245,0.65),0_2px_10px_rgba(0,0,0,0.5)] transition-all duration-200 hover:shadow-[0_0_35px_rgba(139,92,246,0.85)] hover:brightness-110 active:scale-[0.98] sm:w-auto sm:text-base"
                   >
                     <span>Get Started Free</span>
@@ -452,7 +459,7 @@ export function HomeHero({ erpLoginUrl, onWatchDemo }: HomeHeroProps) {
 
                   {/* 3. Book a Demo */}
                   <Link
-                    to="/contact?topic=demo"
+                    to="/contact?topic=demo&source=home"
                     className="inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-full border border-purple-400/50 bg-navy-950/75 px-6 py-3.5 text-sm font-bold text-purple-200 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)] transition-all duration-200 hover:border-purple-300 hover:bg-purple-950/85 hover:text-white active:scale-[0.98] sm:w-auto sm:text-base"
                   >
                     <CalendarDays className="h-4 w-4 text-purple-300" />

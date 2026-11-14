@@ -1,8 +1,8 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type SectionTone = "light" | "tint" | "dark" | "white";
-const SectionToneContext = createContext<SectionTone>("light");
+export type SectionTone = "light" | "tint" | "dark" | "white";
+export const SectionToneContext = createContext<SectionTone>("light");
 
 export function Section({
   children,

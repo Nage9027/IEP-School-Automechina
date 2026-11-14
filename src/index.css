@@ -279,17 +279,6 @@
   background: rgba(255, 255, 255, 0.075);
 }
 
-/* Pricing page: one cohesive dark-glass system while keeping existing plan data/actions. */
-.pricing-page {
-  min-height: 100vh;
-  color: #f8faff;
-  background: #070914;
-}
-
-.pricing-page > section:not(.pricing-page-hero) {
-  color: #f8faff;
-  background-color: #0d1020;
-}
 
 .hosting-page-hero {
   isolation: isolate;
@@ -567,69 +556,6 @@
 .pricing-hero-badge--server { top: 1rem; left: 0; }
 .pricing-hero-badge--mobile { top: 3.2rem; right: 0; animation-delay: 1.2s; }
 .pricing-hero-badge--free { bottom: 0.25rem; left: 1.2rem; animation-delay: 2.1s; }
-
-.pricing-page .bg-white {
-  background-color: #111629 !important;
-}
-
-.pricing-page .bg-surface,
-.pricing-page [class~="bg-violet-50/60"] {
-  background-color: #0c1122 !important;
-}
-
-.pricing-page [class~="bg-violet-50"],
-.pricing-page [class~="bg-violet-50/40"],
-.pricing-page [class~="bg-purple-50"] {
-  background-color: rgba(103, 56, 245, 0.16) !important;
-}
-
-.pricing-page [class~="bg-emerald-50"] {
-  background-color: rgba(16, 185, 129, 0.14) !important;
-}
-
-.pricing-page [class~="text-navy-900"],
-.pricing-page [class~="text-ink"],
-.pricing-page [class~="text-violet-800"] {
-  color: #f8faff !important;
-}
-
-.pricing-page [class~="text-ink/65"],
-.pricing-page [class~="text-ink/70"],
-.pricing-page [class~="text-ink/60"],
-.pricing-page [class~="text-slate-600"],
-.pricing-page [class~="text-slate-500"],
-.pricing-page [class~="text-slate-400"] {
-  color: #aab1c5 !important;
-}
-
-.pricing-page [class~="border-ink/10"],
-.pricing-page [class~="border-ink/15"],
-.pricing-page [class~="border-ink/[0.06]"],
-.pricing-page [class~="divide-ink/10"] {
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.pricing-page [class~="divide-ink/10"] > :not(:first-child) {
-  border-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.pricing-page [class~="text-violet-700"],
-.pricing-page [class~="text-purple-700"] {
-  color: #c4b5fd !important;
-}
-
-.pricing-page [class~="text-emerald-700"],
-.pricing-page [class~="text-emerald-900/75"] {
-  color: #a7f3d0 !important;
-}
-
-.pricing-page input {
-  color: #f8faff;
-}
-
-.pricing-page input::placeholder {
-  color: #929bb2;
-}
 
 @keyframes pricing-glow-drift {
   from { transform: scale(0.96); opacity: 0.72; }

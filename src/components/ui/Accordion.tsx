@@ -1,36 +1,54 @@
-import { useId, useState, type ReactNode } from "react";
+import { useContext, useId, useState, type ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SectionToneContext } from "@/components/ui/Section";
 
 export function AccordionItem({
   question,
   answer,
   defaultOpen = false,
+  tone,
 }: {
   question: string;
   answer: ReactNode;
   defaultOpen?: boolean;
+  tone?: "light" | "dark";
 }) {
   const [open, setOpen] = useState(defaultOpen);
   const id = useId();
+  const inheritedTone = useContext(SectionToneContext);
+  const isDark = (tone ?? (inheritedTone === "dark" ? "dark" : "light")) === "dark";
 
   return (
-    <div className="border-b border-ink/10 last:border-0">
+    <div className={cn("border-b last:border-0", isDark ? "border-white/10" : "border-slate-200/70")}>
       <h3>
         <button
           type="button"
-          className="flex w-full items-start justify-between gap-6 py-5 text-left"
+          className="group flex w-full items-start justify-between gap-6 py-5 text-left transition-colors"
           aria-expanded={open}
           aria-controls={`${id}-panel`}
           onClick={() => setOpen((value) => !value)}
         >
-          <span className="text-base font-bold leading-6 text-navy-900 sm:text-lg">
+          <span
+            className={cn(
+              "text-base font-bold leading-6 transition-colors sm:text-lg",
+              isDark
+                ? "text-white group-hover:text-purple-300"
+                : "text-navy-900 group-hover:text-purple-700",
+            )}
+          >
             {question}
           </span>
           <span
             className={cn(
-              "mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink/10 bg-white text-ink/60 transition-transform duration-300",
-              open && "rotate-180 border-violet-200 bg-violet-50 text-violet-700",
+              "mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full border transition-all duration-300",
+              isDark
+                ? open
+                  ? "rotate-180 border-purple-400 bg-purple-600 text-white shadow-lg shadow-purple-500/25"
+                  : "border-white/15 bg-white/10 text-white/90 group-hover:bg-white/20 group-hover:text-white"
+                : open
+                  ? "rotate-180 border-violet-200 bg-violet-50 text-violet-700"
+                  : "border-slate-200 bg-white text-slate-600 group-hover:border-purple-300 group-hover:text-purple-700",
             )}
           >
             <ChevronDown className="h-4 w-4" />
@@ -46,7 +64,12 @@ export function AccordionItem({
         )}
       >
         <div className="overflow-hidden">
-          <div className="pb-6 pr-12 text-sm leading-7 text-ink/65 sm:text-base">
+          <div
+            className={cn(
+              "pb-6 pr-12 text-sm leading-7 sm:text-base",
+              isDark ? "text-slate-200/90" : "text-slate-600",
+            )}
+          >
             {answer}
           </div>
         </div>
@@ -55,6 +78,25 @@ export function AccordionItem({
   );
 }
 
-export function Accordion({ children }: { children: ReactNode }) {
-  return <div className="divide-y divide-ink/10">{children}</div>;
+export function Accordion({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const inheritedTone = useContext(SectionToneContext);
+  const isDark = inheritedTone === "dark";
+
+  return (
+    <div
+      className={cn(
+        "divide-y",
+        isDark ? "divide-white/10" : "divide-slate-200/70",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
 }

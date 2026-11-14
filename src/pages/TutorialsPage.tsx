@@ -130,6 +130,22 @@ const tutorialHeroPlaylist = [
     tag: "Security & Roles",
     description: "Multi-tenant role access control and end-to-end data encryption.",
   },
+  {
+    id: "teachers-staff",
+    title: "Day 6: Teachers & Staff Management",
+    duration: "01:15",
+    src: "/media/IEP%20DAY%206%20TEACHERS%20AND%20STAFF.mp4",
+    tag: "Staff Management",
+    description: "Faculty management, subject allocations, class teachers, and staff coordination.",
+  },
+  {
+    id: "attendance-work",
+    title: "Day 7: Student Attendance & Daily Workflows",
+    duration: "01:20",
+    src: "/media/IEP%20DAY%207%20Attendence%20%26%20Work.mp4",
+    tag: "Attendance & Work",
+    description: "Daily roll-call marking, automated parent absence alerts, and monthly attendance registers.",
+  },
 ];
 
 export default function TutorialsPage() {
@@ -572,7 +588,12 @@ export default function TutorialsPage() {
                       <button
                         type="button"
                         onClick={() => {
-                          const matchingTut = tutorials.find((t) => t.id === currentHeroVideo.id) ?? tutorials[0];
+                          const matchingTut =
+                            tutorials.find(
+                              (t) =>
+                                t.id === currentHeroVideo.id ||
+                                t.videoUrl === currentHeroVideo.src
+                            ) ?? tutorials[0];
                           setActiveModalItem(matchingTut);
                         }}
                         className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-bold text-white transition-colors hover:bg-white/20"
@@ -597,7 +618,7 @@ export default function TutorialsPage() {
                   </div>
 
                   {/* Horizontal Playlist Selector Pills */}
-                  <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-6">
+                  <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4 lg:grid-cols-8">
                     {tutorialHeroPlaylist.map((item, idx) => {
                       const isActive = idx === heroPlaylistIndex;
                       return (

@@ -4,7 +4,6 @@ import {
   AlertCircle,
   CheckCircle2,
   ChevronDown,
-  Copy,
   Loader2,
   Mail,
   Send,
@@ -12,12 +11,12 @@ import {
 import { Button } from "@/components/ui/Button";
 import { useSiteContent } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import { submitWebsiteEnquiry } from "@/lib/websiteEnquiries";
 
 type Status =
   | { state: "idle" }
   | { state: "sending" }
-  | { state: "sent" }
-  | { state: "mailto"; href: string; body: string }
+  | { state: "dispatched"; enquiryId?: string }
   | { state: "error"; message: string };
 
 const roles = [
@@ -62,7 +61,6 @@ export function LeadForm({
   const { site } = useSiteContent();
   const [searchParams] = useSearchParams();
   const location = useLocation();
-  const endpoint = (import.meta.env.VITE_LEADS_ENDPOINT as string | undefined)?.trim();
 
   const initialTopic = useMemo(() => {
     if (defaultTopic) return defaultTopic;
@@ -81,7 +79,6 @@ export function LeadForm({
   }, [searchParams, defaultPlan]);
 
   const [status, setStatus] = useState<Status>({ state: "idle" });
-  const [copied, setCopied] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -117,64 +114,36 @@ export function LeadForm({
       return;
     }
 
-    const lines = [
-      `Name: ${payload.name}`,
-      `School: ${payload.school}`,
-      `Role: ${payload.role || "Not specified"}`,
-      `Email: ${payload.email}`,
-      `Phone / WhatsApp: ${payload.phone || "Not specified"}`,
-      `Students: ${payload.students || "Not specified"}`,
-      `Plan interest: ${payload.plan}`,
-      `Topic: ${payload.topic}`,
-      "",
-      payload.message || "No additional message.",
-    ];
-    const body = lines.join("\n");
-    const subject = `Website enquiry — ${payload.school}`;
-    const mailtoHref = `mailto:${site.contact.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
-
-    if (!endpoint) {
-      window.location.href = mailtoHref;
-      setStatus({ state: "mailto", href: mailtoHref, body });
-      return;
-    }
-
     setStatus({ state: "sending" });
     try {
-      const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 15000);
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
+      const result = await submitWebsiteEnquiry({
+        customerName: payload.name,
+        email: payload.email,
+        phone: payload.phone,
+        schoolName: payload.school,
+        requestType: payload.topic,
+        sourcePage: `Customization enquiry · ${location.pathname}`,
+        pageUrl: window.location.href,
+        website: honeypot,
+        message: [
+          `Role: ${payload.role || "Not specified"}`,
+          `Student enrollment: ${payload.students || "Not specified"}`,
+          `Plan interest: ${payload.plan}`,
+          `Topic: ${payload.topic}`,
+          "Contact consent: Yes",
+          "",
+          payload.message || "No additional message.",
+        ].join("\n"),
       });
-      window.clearTimeout(timeout);
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
-      }
-      setStatus({ state: "sent" });
+      setStatus({ state: "dispatched", enquiryId: result.enquiryId });
       form.reset();
-    } catch {
+    } catch (error) {
       setStatus({
         state: "error",
-        message: `We could not submit the form from this browser. Please email ${site.contact.email} or use WhatsApp instead.`,
+        message: error instanceof Error
+          ? error.message
+          : `We could not dispatch your enquiry. Please email ${site.contact.email} or use WhatsApp instead.`,
       });
-    }
-  }
-
-  async function copyEnquiry() {
-    if (status.state !== "mailto") return;
-    try {
-      await navigator.clipboard.writeText(
-        `To: ${site.contact.email}\n\n${status.body}`,
-      );
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2500);
-    } catch {
-      setCopied(false);
     }
   }
 
@@ -195,17 +164,21 @@ export function LeadForm({
         </div>
       </div>
 
-      {status.state === "sent" ? (
-        <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
+      {status.state === "dispatched" ? (
+        <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50/90 p-5 shadow-sm">
           <div className="flex items-center gap-2 text-emerald-800">
-            <CheckCircle2 className="h-5 w-5" />
-            <p className="text-sm font-bold">Enquiry submitted</p>
+            <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+            <p className="text-sm font-bold text-emerald-950">Enquiry Submitted Successfully!</p>
           </div>
-          <p className="mt-2 text-sm leading-6 text-emerald-900/75">
-            Your enquiry was received by our team. This website does not create an
-            account or process payment. We will respond using the contact details
-            you provided.
+          <p className="mt-2 text-sm leading-6 text-emerald-900/90">
+            Thank you for contacting IEP Schools. Our team will review your inquiry and connect with you shortly. An acknowledgement has also been dispatched to your email.
           </p>
+          {status.enquiryId && (
+            <div className="mt-3 inline-flex items-center gap-2 rounded-lg bg-white/80 px-3 py-1 text-xs text-emerald-950 border border-emerald-200">
+              <span className="font-semibold text-emerald-700">Reference ID:</span>
+              <span className="font-mono">{status.enquiryId}</span>
+            </div>
+          )}
         </div>
       ) : (
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
@@ -390,33 +363,6 @@ export function LeadForm({
               <div className="flex items-start gap-2">
                 <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
                 <p>{status.message}</p>
-              </div>
-            </div>
-          )}
-
-          {status.state === "mailto" && (
-            <div className="rounded-2xl border border-violet-200 bg-violet-50 p-4">
-              <p className="text-sm font-bold text-navy-900">
-                Your email app should open
-              </p>
-              <p className="mt-1 text-xs leading-6 text-ink/60">
-                The enquiry is not sent until you press Send in your email app. If
-                nothing opened, use the link below or copy the details.
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                <Button href={status.href} variant="outline" size="sm">
-                  <Mail className="h-4 w-4" />
-                  Open email app
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={copyEnquiry}
-                  className="border border-ink/10 bg-white"
-                >
-                  <Copy className="h-4 w-4" />
-                  {copied ? "Copied" : "Copy enquiry"}
-                </Button>
               </div>
             </div>
           )}

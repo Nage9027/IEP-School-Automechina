@@ -190,7 +190,7 @@ export const portals: Portal[] = [
       "Transport & live location (where available)",
       "School messaging",
       "Announcements & notifications",
-      "Parent AI assistant (beta)",
+      "Parent AI Assistant",
     ],
     permissions:
       "Access is limited to the parent's own child. No access to other students, school finance settings or staff records.",
@@ -254,7 +254,7 @@ export const portals: Portal[] = [
       "Expenses",
       "Concessions & refunds",
       "Financial reports",
-      "Finance intelligence (beta)",
+      "Finance Intelligence & Analytics",
     ],
     permissions:
       "Finance management access. User administration and school-wide settings are not part of the finance role.",
@@ -346,7 +346,7 @@ export const portals: Portal[] = [
       "Transport fees",
       "Fuel & maintenance",
       "Incidents & checklists",
-      "Live location updates (beta)",
+      "Live Fleet GPS & Location Updates",
     ],
     permissions:
       "Operated through the admin workspace. There is no distinct transport-manager role in the current role model.",

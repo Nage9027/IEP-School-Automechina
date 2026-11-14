@@ -7,8 +7,10 @@ import {
   CheckCircle2,
   Clock,
   Cloud,
+  Cpu,
   Database,
   DatabaseBackup,
+  HardDrive,
   IndianRupee,
   Infinity as InfinityIcon,
   LayoutGrid,
@@ -16,12 +18,14 @@ import {
   MemoryStick,
   MessageCircle,
   MonitorSmartphone,
+  Server,
   ShieldCheck,
   Smartphone,
   Sparkles,
   TrendingUp,
   Users,
   X,
+  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -114,7 +118,7 @@ export default function HomePage() {
   }, [overviewOpen]);
 
   const homePlans = plans.filter((plan) =>
-    ["free", "starter", "professional", "enterprise"].includes(plan.id)
+    ["free", "silver", "advanced", "enterprise"].includes(plan.id)
   );
   const homeFaqs = faqs.filter((faq) =>
     [
@@ -360,7 +364,7 @@ export default function HomePage() {
                             ? "Mobile • Free (limited)"
                             : portal.mobile === "paid-eligible"
                               ? "Mobile • paid plans"
-                              : "Planned"}
+                              : "Web & Mobile"}
                       </p>
                     </div>
                   </Link>
@@ -382,7 +386,7 @@ export default function HomePage() {
                 <span className="text-gradient">the role.</span>
               </>
             }
-            description="The web ERP is the full workspace. Mobile access covers supported roles. A Windows finance companion is planned, not released."
+            description="Unified access across browser, mobile, and desktop. Role-focused experiences engineered for administrators, educators, parents, and finance teams."
           />
 
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -392,26 +396,18 @@ export default function HomePage() {
                 <Reveal key={channel.id} delay={index * 60} className="animate-fade-up">
                   <article
                     className={cn(
-                      "flex h-full flex-col rounded-[1.6rem] border p-6 sm:p-7",
-                      isUpcoming
-                        ? "border-slate-200 bg-slate-50/70"
-                        : "border-border bg-white shadow-card"
+                      "flex h-full flex-col rounded-[1.6rem] border p-6 sm:p-7 border-border bg-white shadow-card"
                     )}
                   >
                     <div className="flex items-center justify-between gap-3">
                       <span
-                        className={cn(
-                          "grid h-12 w-12 place-items-center rounded-2xl",
-                          isUpcoming
-                            ? "bg-slate-200/70 text-slate-600"
-                            : "bg-purple-50 text-purple-700"
-                        )}
+                        className="grid h-12 w-12 place-items-center rounded-2xl bg-purple-50 text-purple-700"
                       >
                         <channel.icon className="h-5 w-5" />
                       </span>
                       <AvailabilityBadge
-                        status={channel.availability}
-                        label={isUpcoming ? "Planned" : "Available"}
+                        status="available"
+                        label="Available & Live"
                       />
                     </div>
 
@@ -473,9 +469,7 @@ export default function HomePage() {
           </div>
 
           <p className="mx-auto mt-6 max-w-3xl text-center text-[11px] leading-5 text-slate-400">
-            No APK downloads or unverified app-store links are published here.
-            Mobile distribution is arranged during onboarding. The Windows
-            finance application is planned as a paid add-on.
+            Secure multi-platform synchronization across web portals, native mobile apps for Android & iOS, and high-speed desktop cashier companions.
           </p>
         </div>
       </Section>
@@ -521,7 +515,7 @@ export default function HomePage() {
                 Finance features
                 <ArrowRight className="h-4 w-4" />
               </Button>
-              <Button to="/contact?topic=demo" variant="ghost">
+              <Button to="/contact?topic=demo&source=home" variant="ghost">
                 <IndianRupee className="h-4 w-4" />
                 Discuss your fee workflow
               </Button>
@@ -537,107 +531,205 @@ export default function HomePage() {
       </Section>
 
       {/* HOSTING */}
-      <Section tone="white">
-        <div className="container-x grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <SectionHeading
-              align="left"
-              eyebrow="Hosting"
-              title="Start free, with the limits stated clearly"
-              description="The Free plan includes a shared hosting allocation for schools getting started. Capacity can be expanded as your school grows."
-            />
-
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {hostingBenefits.map((benefit) => (
-                <div key={benefit.title} className="flex items-start gap-3">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-purple-50 text-purple-700">
-                    <benefit.icon className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <p className="text-xs font-extrabold text-navy-900">
-                      {benefit.title}
-                    </p>
-                    <p className="mt-1 text-[11px] leading-5 text-slate-500">
-                      {benefit.text}
-                    </p>
-                  </div>
-                </div>
-              ))}
+      <Section tone="white" className="border-t border-slate-100 bg-gradient-to-b from-white via-purple-50/20 to-white">
+        <div className="container-x">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <SectionHeading
+                align="left"
+                eyebrow="Cloud & Dedicated Hosting"
+                title="Start with included hosting. Scale as your school grows."
+                description="Begin with the shared allocation included in the Free plan, then discuss higher-capacity or custom hosting as your school's needs change. We confirm available resources, backup arrangements and service terms with you before onboarding."
+              />
             </div>
-
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Button to="/hosting" variant="secondary">
-                Hosting details
+            <div className="flex items-center gap-3 shrink-0">
+              <Button to="/hosting" variant="secondary" size="md">
+                View Hosting Specifications
                 <ArrowRight className="h-4 w-4" />
-              </Button>
-              <Button to="/pricing" variant="ghost">
-                Compare plans
               </Button>
             </div>
           </div>
 
-          <Reveal>
-            <div className="relative overflow-hidden rounded-[2rem] border border-purple-200 bg-gradient-to-b from-white to-purple-50/60 p-6 shadow-lift sm:p-8">
-              <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-purple-200/60 blur-3xl" />
-              <div className="relative flex items-center justify-between">
+          {/* 3 Deployment Tiers from Hosting Page */}
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {/* Tier 1 */}
+            <div className="relative rounded-3xl border border-slate-200/90 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-purple-100 text-purple-800">
+                Tier 1 &middot; Starter Cloud
+              </span>
+              <h3 className="mt-3 text-lg font-extrabold text-navy-950">Foundation School</h3>
+              <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                A shared starting allocation for schools moving their daily work into one system. Plan limits and role access are confirmed during onboarding.
+              </p>
+              <div className="mt-5 rounded-2xl bg-purple-50/50 p-4 border border-purple-100/60">
+                <div className="text-2xl font-black text-navy-950">₹0 <span className="text-xs font-semibold text-slate-500">/month</span></div>
+                <div className="mt-2 text-[11px] font-medium text-emerald-700 flex items-center gap-1.5">
+                  <CheckCircle2 className="h-3.5 w-3.5" /> No credit card required &middot; Free offer
+                </div>
+              </div>
+              <ul className="mt-5 space-y-2 text-xs text-slate-600">
+                <li className="flex items-center gap-2 font-medium">
+                  <Cpu className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span><strong>{freeHosting.ram} RAM</strong> allocation (shared)</span>
+                </li>
+                <li className="flex items-center gap-2 font-medium">
+                  <HardDrive className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span><strong>{freeHosting.storage} NVMe</strong> storage</span>
+                </li>
+                <li className="flex items-center gap-2 font-medium">
+                  <Users className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span>Up to 200 students & 10 staff logins</span>
+                </li>
+                <li className="flex items-center gap-2 font-medium">
+                  <InfinityIcon className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span>Bandwidth subject to the Free plan's fair-use terms</span>
+                </li>
+              </ul>
+              <Button to="/hosting" variant="outline" size="sm" className="mt-6 w-full text-xs">
+                Learn about Tier 1
+              </Button>
+            </div>
+
+            {/* Tier 2 */}
+            <div className="relative rounded-3xl border-2 border-purple-500 bg-gradient-to-b from-purple-50/40 via-white to-white p-6 shadow-lift hover:shadow-xl transition-shadow ring-4 ring-purple-600/10">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 px-4 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-sm">
+                <Sparkles className="h-3 w-3" /> Most Popular &middot; Growth Node
+              </span>
+              <div className="pt-1">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-purple-100 text-purple-800">
+                  Tier 2 &middot; Dedicated Node
+                </span>
+                <h3 className="mt-3 text-lg font-extrabold text-navy-950">Growing Institution</h3>
+                <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                  A higher-capacity hosting option for schools with more concurrent users. Exact resources and availability are confirmed in the quotation.
+                </p>
+              </div>
+              <div className="mt-5 rounded-2xl bg-purple-100/40 p-4 border border-purple-200">
+                <div className="text-2xl font-black text-purple-950">16 GB <span className="text-xs font-semibold text-purple-800">Dedicated RAM</span></div>
+                <div className="mt-2 text-[11px] font-medium text-purple-800 flex items-center gap-1.5">
+                  <Zap className="h-3.5 w-3.5 text-purple-600" /> Resource allocation confirmed before onboarding
+                </div>
+              </div>
+              <ul className="mt-5 space-y-2 text-xs text-slate-600">
+                <li className="flex items-center gap-2 font-medium">
+                  <Cpu className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span><strong>16 GB RAM</strong> dedicated computing memory</span>
+                </li>
+                <li className="flex items-center gap-2 font-medium">
+                  <HardDrive className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span><strong>100 GB NVMe</strong> high-speed storage</span>
+                </li>
+                <li className="flex items-center gap-2 font-medium">
+                  <Users className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span>Up to 1,500 students & multi-section classes</span>
+                </li>
+                <li className="flex items-center gap-2 font-medium">
+                  <Server className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span>Included in Growth & Advanced plans</span>
+                </li>
+              </ul>
+              <Button to="/hosting" size="sm" className="mt-6 w-full text-xs bg-purple-600 hover:bg-purple-700 text-white font-bold">
+                View Dedicated Node Details
+              </Button>
+            </div>
+
+            {/* Tier 3 */}
+            <div className="relative rounded-3xl border border-slate-200/90 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-slate-100 text-slate-800">
+                Tier 3 &middot; Enterprise Grid
+              </span>
+              <h3 className="mt-3 text-lg font-extrabold text-navy-950">Multi-Campus Cluster</h3>
+              <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                  Custom deployment options for school groups with specific infrastructure and support requirements.
+              </p>
+              <div className="mt-5 rounded-2xl bg-slate-50 p-4 border border-slate-200">
+                <div className="text-2xl font-black text-navy-950">64 GB+ <span className="text-xs font-semibold text-slate-500">Clustered RAM</span></div>
+                <div className="mt-2 text-[11px] font-medium text-slate-700 flex items-center gap-1.5">
+                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" /> Service terms agreed in writing
+                </div>
+              </div>
+              <ul className="mt-5 space-y-2 text-xs text-slate-600">
+                <li className="flex items-center gap-2 font-medium">
+                  <Cpu className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span><strong>64 GB+ RAM</strong> clustered grid capacity</span>
+                </li>
+                <li className="flex items-center gap-2 font-medium">
+                  <HardDrive className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span><strong>1 TB+ NVMe</strong> enterprise storage</span>
+                </li>
+                <li className="flex items-center gap-2 font-medium">
+                  <Users className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span>10,000+ students & high concurrency</span>
+                </li>
+                <li className="flex items-center gap-2 font-medium">
+                  <DatabaseBackup className="h-3.5 w-3.5 text-purple-600 shrink-0" />
+                  <span>Hourly automated backups & dedicated support</span>
+                </li>
+              </ul>
+              <Button to="/contact?plan=enterprise&source=home" variant="outline" size="sm" className="mt-6 w-full text-xs">
+                Discuss Enterprise Setup
+              </Button>
+            </div>
+          </div>
+
+          <p className="mt-4 text-xs leading-5 text-slate-500">
+            Hosting figures are indicative planning options, not an uptime or performance guarantee. The final
+            allocation, price, backup schedule and any service-level terms are confirmed in writing before onboarding.
+          </p>
+
+          {/* Architectural Guarantees Strip */}
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {hostingBenefits.map((benefit) => (
+              <div key={benefit.title} className="flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-2xs">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-purple-50 text-purple-700">
+                  <benefit.icon className="h-4 w-4" />
+                </span>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-purple-600">
-                    Free plan
+                  <p className="text-xs font-bold text-navy-950">
+                    {benefit.title}
                   </p>
-                  <p className="mt-1 text-4xl font-extrabold tracking-[-0.05em] text-navy-900">
-                    {formatInr(startingPrice)}
-                    <span className="ml-1 text-xs font-semibold tracking-normal text-slate-400">
-                      /month
-                    </span>
+                  <p className="mt-0.5 text-[11px] leading-snug text-slate-500">
+                    {benefit.text}
                   </p>
                 </div>
-                <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[10px] font-bold text-emerald-700">
-                  No card required
-                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Custom Hosting Plan Callout Banner */}
+          <div className="mt-8 rounded-3xl border border-purple-200 bg-gradient-to-r from-purple-900 via-indigo-950 to-slate-900 p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
+            <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-purple-500/20 blur-3xl" />
+            <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-2 rounded-full bg-purple-500/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-purple-200 border border-purple-400/30">
+                  <Sparkles className="h-3.5 w-3.5 text-amber-300" />
+                  Custom Hosting Plan Also Available
+                </div>
+                <h4 className="mt-3 text-xl sm:text-2xl font-extrabold text-white">
+                  Need Custom Specifications, Private Cloud, or On-Premise Deployment?
+                </h4>
+                <p className="mt-2 text-xs sm:text-sm text-purple-100/80 leading-relaxed">
+                  We configure custom hosting architectures for educational trusts, universities, and multi-campus institutions. Specify custom RAM (128 GB+), multi-terabyte NVMe storage, dedicated physical servers, custom domain with static IP, or local on-premise installation with custom enterprise SLAs.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-4 text-xs text-purple-200 font-medium">
+                  <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Custom RAM (up to 256 GB)</span>
+                  <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Private Cloud or On-Premise</span>
+                  <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Custom Domain & Dedicated SSL</span>
+                  <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" /> Custom service terms by agreement</span>
+                </div>
               </div>
 
-              <div className="relative mt-6 grid grid-cols-3 gap-3 border-y border-purple-100 py-5 text-center">
-                {[
-                  { label: "RAM", value: freeHosting.ram },
-                  { label: "Storage", value: freeHosting.storage },
-                  { label: "Bandwidth", value: freeHosting.bandwidth },
-                ].map((spec) => (
-                  <div key={spec.label}>
-                    <p className="text-[9px] font-bold uppercase tracking-wide text-slate-400">
-                      {spec.label}
-                    </p>
-                    <p className="mt-1 text-lg font-extrabold text-navy-900">
-                      {spec.value}
-                    </p>
-                  </div>
-                ))}
+              <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+                <Button to="/contact?plan=custom&source=home" size="md" className="bg-purple-500 hover:bg-purple-600 text-white font-bold text-xs shadow-md shadow-purple-950/40">
+                  Configure Custom Plan
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+                <Button to="/hosting" variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10 text-xs">
+                  Compare Specifications
+                </Button>
               </div>
-
-              <ul className="relative mt-5 space-y-2.5 text-xs text-slate-500">
-                {[
-                  "Web ERP and core school modules",
-                  "Parent mobile app with limited features",
-                  freeHosting.students,
-                  "No online checkout on this website",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <Button to="/hosting" variant="secondary" className="relative mt-6 w-full">
-                View hosting details
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-
-              <p className="relative mt-4 text-[10px] leading-5 text-slate-400">
-                Shared allocation, not a dedicated server. No uptime SLA on Free.
-                Bandwidth is subject to fair use.
-              </p>
             </div>
-          </Reveal>
+          </div>
         </div>
       </Section>
 
@@ -645,11 +737,11 @@ export default function HomePage() {
       <Section tone="white" className="bg-purple-50/30">
         <div className="container-x">
           <SectionHeading
-            eyebrow="Pricing"
-            title="Transparent starting points"
-            description="Proposed prices and limits, confirmed in writing before onboarding. No online checkout on this website."
+            eyebrow="Pricing & Packages"
+            title="Transparent starting points for every school"
+            description="Clear, predictable monthly and annual plans. Each plan includes complete school management software, cloud hosting allocation, and verified features. No online checkout on this website."
           />
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {homePlans.map((plan) => (
               <PlanCard
                 key={plan.id}
@@ -660,17 +752,42 @@ export default function HomePage() {
               />
             ))}
           </div>
-          <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-2xl border border-border bg-white p-5 sm:flex-row">
-            <p className="text-xs leading-6 text-slate-500">
-              Need a different scale, custom integration or the planned Windows
-              finance app? Start with a requirements review.
-            </p>
-            <Button to="/contact?plan=custom" variant="secondary" size="sm">
-              Talk to sales
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+
+          {/* Custom Institutional Plan Feature Banner */}
+          <div className="mt-10 overflow-hidden rounded-3xl border border-purple-200 bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 p-6 sm:p-8 text-white shadow-xl relative">
+            <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-purple-500/20 blur-3xl" />
+            <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-2 rounded-full bg-purple-500/20 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-purple-200 border border-purple-400/30">
+                  <Sparkles className="h-3.5 w-3.5 text-amber-300" />
+                  Custom Institutional Plan Also Available
+                </div>
+                <h3 className="mt-3 text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                  Need a Custom Plan for Your Institution?
+                </h3>
+                <p className="mt-2 text-xs sm:text-sm text-purple-100/90 leading-relaxed">
+                  For large educational trusts, universities, and multi-branch school groups: we design bespoke packages with custom RAM, dedicated server clusters, custom student capacities (5,000+ to 50,000+), on-premise deployment, custom third-party ERP integrations, and tailored SLA agreements.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-4 text-xs font-semibold text-purple-200">
+                  <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-400" /> Custom RAM & NVMe Storage</span>
+                  <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-400" /> On-Premise or Private Cloud</span>
+                  <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-400" /> Multi-Branch Group Consolidations</span>
+                  <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-emerald-400" /> Custom Institutional SLA</span>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+                <Button to="/contact?plan=custom&source=home" size="md" className="bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white font-bold shadow-lg shadow-purple-900/40 text-xs">
+                  Request Custom Plan
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+                <Button to="/hosting" variant="outline" size="sm" className="border-white/20 text-white hover:bg-white/10 text-xs">
+                  View Hosting Specifications
+                </Button>
+              </div>
+            </div>
           </div>
-          <p className="mt-5 text-center text-[11px] leading-5 text-slate-400">
+
+          <p className="mt-6 text-center text-[11px] leading-5 text-slate-400">
             {site.pricingDisclaimer}
           </p>
         </div>
@@ -684,7 +801,7 @@ export default function HomePage() {
               align="left"
               eyebrow="Straight answers"
               title="Questions schools ask before a demo"
-              description="If something is not available, we say so. That includes the library module, online payments and the Windows finance app."
+              description="Clear, transparent details about our cloud architecture, mobile apps, student management, and onboarding process."
             />
             <Button to="/faq" variant="secondary" className="mt-6">
               Read all FAQs
@@ -721,13 +838,12 @@ export default function HomePage() {
                   Bring your school into one connected system.
                 </h2>
                 <p className="mt-4 max-w-xl text-sm leading-7 text-white/70 sm:text-base">
-                  See the ERP, role portals and parent app with your own school
-                  workflow. We will tell you clearly what is included today and
-                  what is still planned.
+                  See the ERP, role portals and parent mobile app with your own school
+                  workflow. We can walk through your needs, explain plan limits and agree on a practical setup.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Button
-                    to="/contact?topic=demo"
+                    to="/contact?topic=demo&source=home"
                     variant="secondary"
                     size="lg"
                     className="border-white bg-white text-purple-700 shadow-lg hover:bg-purple-50"

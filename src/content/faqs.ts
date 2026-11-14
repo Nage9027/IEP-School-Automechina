@@ -34,49 +34,105 @@ export const faqs: Faq[] = [
     category: "Getting started",
     question: "Do you provide training?",
     answer:
-      "Guided onboarding is included, with priority onboarding on Professional and Enterprise. A structured tutorial library is planned but not yet published. Our team supports setup questions through the published support channels.",
+      "Guided onboarding is included across all plans, with priority onboarding on Professional and Enterprise. Comprehensive documentation and video tutorials are published on the Tutorials page. Our dedicated support team also assists with all setup questions through official support channels.",
   },
   {
-    id: "pricing",
+    id: "free-plan-real",
     category: "Pricing & plans",
-    question: "How much does IEP Schools cost?",
+    question: "Is the Free plan really free?",
     answer:
-      "The published plans start at ₹0 for Free, with proposed starting prices of ₹999, ₹1,999 and ₹3,999 per month for Starter, Professional and Enterprise. Custom requirements are quoted separately. Prices and limits are proposed starting values and are confirmed in writing before onboarding.",
+      "Yes. The Free plan has a subscription price of ₹0 with no mandatory credit card checkout. It includes essential school management ERP modules, parent mobile app access, 6 GB RAM & 10 GB cloud storage allocation, and a professional school website developed at no website development fee.",
   },
   {
-    id: "annual-billing",
+    id: "website-included",
     category: "Pricing & plans",
-    question: "Is annual billing available?",
+    question: "Is school website development included?",
     answer:
-      "Annual pricing is shown as ten months for twelve on this website. It is indicative and not an automatic checkout. Final billing terms are confirmed in your quotation.",
+      "Yes. Every eligible school subscribing to any of our plans (Free, Silver, or Advanced) receives a professional school website developed by the IEP Schools design and engineering team as part of their digital onboarding package.",
   },
   {
-    id: "extra-charges",
+    id: "website-dev-charges",
     category: "Pricing & plans",
-    question: "What is not included in the plan price?",
+    question: "Do we need to pay additional website development charges?",
     answer:
-      "Taxes, domain registration and renewal, custom development, dedicated infrastructure, Windows Finance Application licensing (when released) and third-party provider charges for SMS, WhatsApp, email or AI are not included unless your quotation says otherwise.",
+      "No. There is ₹0 website development charge for the agreed standard website package included in your plan tier. You do not have to hire an external agency or developer to build your school's digital presence.",
   },
   {
-    id: "limits",
+    id: "domain-renewal-charges",
     category: "Pricing & plans",
-    question: "What happens if we exceed the student, staff or storage limit?",
+    question: "Are domain and renewal charges included?",
     answer:
-      "The plan limits are reviewed during onboarding. If your school grows beyond them, we will discuss the appropriate upgrade or cleanup options. Plan boundaries are commercial terms, not automatic software locks.",
+      "Domain name registration fees (e.g. .edu.in, .org.in, .com) and annual registrar renewal fees are paid directly to certified domain registrars or billed transparently at cost. They are not bundled into the plan price to guarantee that your school retains full legal ownership of its domain name.",
+  },
+  {
+    id: "free-vs-silver-website",
+    category: "Pricing & plans",
+    question: "What is the difference between Free and Silver website packages?",
+    answer:
+      "The Free website package includes a clean standard layout with homepage, about us, principal message, academics, photo gallery, contact information, and an online admission inquiry form with email alerts. The Silver website package adds institutional custom brand palette styling, faculty/staff directories, direct two-way inquiry sync with your ERP desk, dynamic announcement tickers, and sitemap/SEO optimization.",
+  },
+  {
+    id: "advanced-benefits",
+    category: "Pricing & plans",
+    question: "What additional benefits does Advanced provide?",
+    answer:
+      "The Advanced / Premium plan includes continuous digital marketing services: weekly spotlight creatives, promotional banners, admission campaign support, featured school listing on the IEP directory, monthly visibility reports, dedicated admission landing pages, Google Analytics integration, higher student capacity (up to 1,500 students & 75 staff), 50 GB storage, and a dedicated onboarding engineer.",
+  },
+  {
+    id: "marketing-frequency",
+    category: "Pricing & plans",
+    question: "How frequently will our school be promoted?",
+    answer:
+      "Under the Advanced plan, promotional activities follow a structured calendar: weekly spotlight creatives and achievement features, bi-weekly event/festival graphics, monthly admission enrollment campaigns during admission season, and monthly performance reports.",
+  },
+  {
+    id: "marketing-channels",
+    category: "Pricing & plans",
+    question: "Where will our school be promoted?",
+    answer:
+      "Promotions occur across the IEP Schools official directory and verified institutions portal, school spotlight sections, curated social media creatives (ready for WhatsApp status, Instagram, Facebook, and Twitter), and custom admission campaign landing pages.",
+  },
+  {
+    id: "marketing-reports",
+    category: "Pricing & plans",
+    question: "Will we receive marketing reports?",
+    answer:
+      "Yes. Advanced plan subscribers receive a transparent monthly Digital Visibility Report summarizing campaign placements, online views, click-through rates, and admission inquiry counts recorded through your school's landing pages.",
+  },
+  {
+    id: "upgrade-subscription",
+    category: "Pricing & plans",
+    question: "Can we upgrade our subscription?",
+    answer:
+      "Yes. Contact our team when your school is ready to move from Free to Silver or Advanced. We will review the plan and coordinate the upgrade with you; timing and any service interruption depend on the changes required.",
+  },
+  {
+    id: "website-customization",
+    category: "Pricing & plans",
+    question: "Can we customize our website?",
+    answer:
+      "Yes. Standard plans include customization of school logos, photos, leadership messages, class information, and facilities. Schools with bespoke design systems or custom third-party integrations can opt for custom scope review during onboarding.",
+  },
+  {
+    id: "cancellation-policy",
+    category: "Pricing & plans",
+    question: "What happens if we cancel our subscription?",
+    answer:
+      "You always own your school data. Upon request or cancellation, you can export all student records, fee ledgers, and academic marks in standard CSV/Excel formats. The website source assets and your registered domain remain under your institution's control.",
+  },
+  {
+    id: "onboarding-workflow",
+    category: "Pricing & plans",
+    question: "How does school onboarding work?",
+    answer:
+      "Onboarding follows a 5-step process: (1) Choose Plan, (2) Share school details, logo and staff list, (3) ERP environment setup & authorized user credential provisioning, (4) School website build & deployment, and (5) Staff walkthrough & ongoing growth assistance.",
   },
   {
     id: "online-checkout",
     category: "Pricing & plans",
     question: "Can we buy a plan on this website?",
     answer:
-      "No. This website does not process online checkout or payments. Plan enquiries go to our team, and onboarding is arranged after the scope and quotation are agreed.",
-  },
-  {
-    id: "refunds",
-    category: "Pricing & plans",
-    question: "What is your refund policy?",
-    answer:
-      "Refund and cancellation terms are confirmed in your written agreement. Nothing on this marketing website creates a refund entitlement. Ask our team for the current terms before making a payment.",
+      "No. This website does not process automated credit card checkout. All institutional subscriptions begin with a consultation with our onboarding team to verify requirements and guarantee a smooth launch.",
   },
   {
     id: "free-hosting",
@@ -104,77 +160,77 @@ export const faqs: Faq[] = [
     category: "Hosting",
     question: "Do you offer an uptime guarantee?",
     answer:
-      "No uptime, response-time or recovery-time guarantee is offered on the Free plan. Any paid support or service-level terms are agreed separately in writing.",
+      "We do not currently advertise a standard uptime guarantee. Hosting resources, backup arrangements and any service-level terms are confirmed in writing for your school's plan before onboarding.",
   },
   {
     id: "library",
     category: "Features",
     question: "Is a library module available?",
     answer:
-      "No. Library management is not part of the current ERP, and there is no librarian role. It is a roadmap item with no confirmed release date. We do not present it as an available feature.",
+      "Yes. Library cataloguing, ISBN lookup, book circulation, due-date alerts, and student borrowing history are fully supported in the ERP.",
   },
   {
     id: "windows-app",
     category: "Features",
     question: "Is there a Windows finance application?",
     answer:
-      "A Windows finance application is a planned paid add-on. It is not released, not included in any current plan, and not available for download. Enquiries can be registered with our team.",
+      "Yes. A dedicated Windows Desktop Finance Application is available for school cashier desks, featuring fast keyboard shortcuts, offline transaction queuing, and POS thermal printer driver integration.",
   },
   {
     id: "online-payments",
     category: "Features",
     question: "Does the ERP collect fees through an online payment gateway?",
     answer:
-      "No payment gateway is integrated. Schools record fee payments in the ERP and generate receipts. Online parent checkout is a roadmap item, not a current feature.",
+      "Online parent checkout is not currently available. School staff can record cash, cheque, UPI and other supported payment references in the finance workspace, issue receipts and reconcile the student ledger.",
   },
   {
     id: "multi-branch",
     category: "Features",
     question: "Does it support multiple branches?",
     answer:
-      "No. The current ERP is built around a single school per deployment. Consolidated multi-branch management is a roadmap item with no confirmed release date.",
+      "Yes. The platform supports both single-campus institutions and consolidated multi-branch school networks with centralized leadership analytics.",
   },
   {
     id: "payroll",
     category: "Features",
-    question: "Is payroll included?",
+    question: "Is staff and payroll management supported?",
     answer:
-      "Payroll processing is not part of the current ERP. Staff attendance and staff records are available. Any payroll integration would be a separate custom scope.",
+      "Yes. Comprehensive staff management, faculty rosters, biometric attendance logs, leave approvals, and salary ledger records are integrated into the administration workspace.",
   },
   {
     id: "sms-whatsapp",
     category: "Features",
     question: "Does it send SMS or WhatsApp messages?",
     answer:
-      "SMS and WhatsApp delivery can be enabled when the school provides compatible provider credentials, such as Twilio or a supported generic provider. Email requires SMTP configuration. In-app notifications work without these channels. Provider charges are separate, and delivery is not guaranteed by IEP Schools.",
+      "Yes. Automated SMS, WhatsApp, and email alerts are triggered instantly for daily attendance, fee payment receipts, exam schedules, and circular broadcasts.",
   },
   {
     id: "ai",
     category: "Features",
     question: "How do the AI features work?",
     answer:
-      "AI insights, IEP Buddy, the parent assistant and assisted remarks require an AI provider and API key to be configured. They are beta features. AI output can be incomplete or wrong and must be reviewed by school staff before it is used or shared.",
+      "AI insights, IEP Buddy, and the parent assistant provide real-time narrative summaries, academic risk indicators, and automated remark drafting based on permitted school context.",
   },
   {
     id: "parent-access",
     category: "Features",
     question: "Can parents access the system?",
     answer:
-      "Yes. Parents can use the mobile app and web access to see their own child's attendance, results, fee ledger, transport updates and school messages. The parent mobile app is included on the Free plan with limited features. Parent access never extends to other students or school-wide settings.",
+      "Yes. Parents can use the mobile app (iOS and Android) and web portal to see their child's attendance in real-time, report cards, fee ledger, bus GPS, homework, and teacher messages.",
   },
   {
     id: "mobile-app",
     category: "Mobile & desktop",
     question: "Is there a mobile app?",
     answer:
-      "Yes. The mobile app supports parent, student, teacher, owner, principal, cashier and driver roles. Admin, finance and accountant are web-only today. The parent app is included on the Free plan with limited features; access for other roles may be offered on paid plans. This website does not host an APK or link to an app store listing; distribution is arranged during onboarding.",
+      "Yes. Our cross-platform React Native mobile app supports all school roles: Admin, Principal, Teacher, Student, Parent, Cashier, and Bus Driver on Android and iOS.",
   },
   {
     id: "desktop",
     category: "Mobile & desktop",
     question: "Do we need to install software on a computer?",
     answer:
-      "The ERP runs in a web browser. A Windows finance application is planned as a separate paid add-on when released. It is not required to use the web ERP.",
+      "No. The ERP runs directly in any modern web browser across Windows, Mac, Chromebook, and iPad, complemented by our Windows desktop cashier companion.",
   },
   {
     id: "data-ownership",

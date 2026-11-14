@@ -330,9 +330,100 @@ export const tutorials: Tutorial[] = [
       },
     ],
   },
+  {
+    id: "teachers-and-staff",
+    title: "Teachers & Staff: Faculty Profiles, Class Teachers & Allocation",
+    description:
+      "Comprehensive staff administration: teacher onboarding, subject specializations, class teacher appointments, and daily workload allocation.",
+    categoryId: "staff-management",
+    level: "Beginner",
+    duration: "01:15",
+    videoUrl: "/media/IEP%20DAY%206%20TEACHERS%20AND%20STAFF.mp4",
+    thumbnailUrl: "/media/Images/Futuristic School Portal Network.png",
+    published: true,
+    role: "Principal & Academic Coordinator",
+    keyTakeaways: [
+      "Creating teacher profiles with qualification records and document uploads",
+      "Assigning designated class teachers to primary and secondary sections",
+      "Mapping subjects and weekly teaching periods to avoid timetable clashes",
+      "Managing staff leaves, attendance logs, and substitute teacher cover",
+    ],
+    steps: [
+      {
+        step: 1,
+        title: "Create Staff Profile",
+        instruction: "Navigate to Staff Management > Add Employee and enter employee details, department, and teaching qualifications.",
+      },
+      {
+        step: 2,
+        title: "Assign Class & Section Leadership",
+        instruction: "Designate class teachers responsible for daily morning attendance marking and term report card approvals.",
+      },
+      {
+        step: 3,
+        title: "Allocate Subjects & Period Quotas",
+        instruction: "Map subjects to teachers and configure maximum weekly workload hours to optimize teaching schedules.",
+      },
+      {
+        step: 4,
+        title: "Issue Portal Logins & Permissions",
+        instruction: "Generate secure mobile and web credentials with role-based teacher portal privileges.",
+      },
+    ],
+  },
+  {
+    id: "attendance-and-daily-work",
+    title: "Student Attendance & Daily Workflows: Register, Alerts & Reports",
+    description:
+      "Rapid daily roll-call marking, real-time automated parent SMS/WhatsApp absence alerts, monthly attendance registers, and CBSE compliance reporting.",
+    categoryId: "attendance",
+    level: "Beginner",
+    duration: "01:20",
+    videoUrl: "/media/IEP%20DAY%207%20Attendence%20%26%20Work.mp4",
+    thumbnailUrl: "/media/Images/Smart School Management Dashboard.png",
+    published: true,
+    role: "Class Teacher & Principal",
+    keyTakeaways: [
+      "One-click classroom roll call with present, absent, late, and half-day statuses",
+      "Instant automated notification dispatch to parents upon marking absence",
+      "Generating monthly attendance registers with CBSE and State Board percentages",
+      "Tracking student attendance trends, frequent leaves, and medical exemptions",
+    ],
+    steps: [
+      {
+        step: 1,
+        title: "Open Daily Attendance Register",
+        instruction: "Select standard and section to open the interactive daily attendance sheet pre-populated with active students.",
+      },
+      {
+        step: 2,
+        title: "Mark Student Statuses",
+        instruction: "Toggle Present, Absent, Tardy, or Excused with single clicks or quick keyboard shortcuts.",
+      },
+      {
+        step: 3,
+        title: "Trigger Automated Absence Alerts",
+        instruction: "Submitting attendance automatically sends instant WhatsApp and SMS alerts to the parents of absent students.",
+      },
+      {
+        step: 4,
+        title: "Export Monthly Compliance Register",
+        instruction: "Generate signed monthly registers with attendance percentage calculations ready for board audits.",
+      },
+    ],
+  },
 ];
 
 export const productFilms: ProductFilm[] = [
+  {
+    id: "iep-hero-animation-2",
+    title: "IEP Schools 3D Digital Campus Animation",
+    description:
+      "A complete 3D digital walkthrough of IEP Schools automated education ecosystem and connected workflows.",
+    duration: "01:30",
+    src: "/media/iep%20animation%20(2).mp4",
+    tag: "3D Animation",
+  },
   {
     id: "about",
     title: "IEP Schools — an introduction",
@@ -341,6 +432,24 @@ export const productFilms: ProductFilm[] = [
     duration: "00:59",
     src: "/media/about.mp4",
     tag: "Overview",
+  },
+  {
+    id: "teachers-staff",
+    title: "Teachers and staff management",
+    description:
+      "Faculty directory, subject allocations, class teachers and staff coordination.",
+    duration: "01:15",
+    src: "/media/IEP%20DAY%206%20TEACHERS%20AND%20STAFF.mp4",
+    tag: "Staff",
+  },
+  {
+    id: "attendance-work",
+    title: "Attendance and daily workflows",
+    description:
+      "Daily roll-call marking, automated parent absence notifications, and monthly registers.",
+    duration: "01:20",
+    src: "/media/IEP%20DAY%207%20Attendence%20%26%20Work.mp4",
+    tag: "Attendance",
   },
   {
     id: "student-management",

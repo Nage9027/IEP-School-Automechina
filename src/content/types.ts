@@ -50,6 +50,8 @@ export interface Plan {
   id: string;
   name: string;
   tagline: string;
+  positioning?: string;
+  targetAudience?: string[];
   monthly: number | null;
   annual: number | null;
   priceNote: string;
@@ -59,6 +61,16 @@ export interface Plan {
   features: string[];
   limits: PlanLimit;
   support: string;
+  websiteIncluded?: boolean;
+  websitePackage?: string;
+  websiteDeliverables?: string[];
+  websiteScopeNotes?: string;
+  marketingIncluded?: boolean;
+  marketingServices?: string[];
+  marketingFrequency?: string;
+  marketingSchedule?: Array<{ task: string; frequency: string; description: string }>;
+  marketingWorkflow?: Array<{ step: number; title: string; description: string }>;
+  disclosures?: string[];
 }
 
 export interface ComparisonRow {

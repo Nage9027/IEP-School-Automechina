@@ -26,6 +26,7 @@ import { Accordion, AccordionItem } from "@/components/ui/Accordion";
 import { Reveal } from "@/components/ui/Reveal";
 import { useSiteContent } from "@/lib/content";
 import { usePageMeta } from "@/lib/seo";
+import { submitWebsiteEnquiry } from "@/lib/websiteEnquiries";
 
 // Institutional response metrics
 const heroStats = [
@@ -126,8 +127,8 @@ interface FormError {
 }
 
 interface FormStatus {
-  state: "idle" | "sending" | "sent" | "mailto" | "error";
-  href?: string;
+  state: "idle" | "sending" | "dispatched" | "error";
+  enquiryId?: string;
   message?: string;
 }
 
@@ -136,6 +137,7 @@ export default function ContactPage() {
   const [searchParams] = useSearchParams();
   const topicParam = searchParams.get("topic");
   const planParam = searchParams.get("plan");
+  const sourceParam = searchParams.get("source");
 
   usePageMeta({
     title: "Contact & Institutional Demo | IEP Schools – Smart Education",
@@ -145,8 +147,6 @@ export default function ContactPage() {
   });
 
   const contactFaqs = useMemo(() => faqs, [faqs]);
-  const endpoint = (import.meta.env.VITE_LEADS_ENDPOINT as string | undefined)?.trim();
-
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -164,17 +164,25 @@ export default function ContactPage() {
 
   // Handle URL query parameters (e.g. ?topic=demo, ?plan=pro)
   useEffect(() => {
-    if (topicParam === "demo") {
+    const topicRequests: Record<string, string> = {
+      demo: "Book a Live Interactive Demo",
+      consultation: "Pricing & Implementation Consultation",
+      marketing: "School Marketing Support",
+      website: "School Website Development",
+      "windows-finance": "Windows Finance App",
+      "mobile-app": "Mobile App Access",
+    };
+    if (topicParam && topicRequests[topicParam]) {
       setFormData((prev) => ({
         ...prev,
-        requestDemo: true,
-        projectType: "Book a Live Interactive Demo",
+        requestDemo: topicParam === "demo",
+        projectType: topicRequests[topicParam],
       }));
     } else if (planParam) {
       const planName = planParam.charAt(0).toUpperCase() + planParam.slice(1);
       setFormData((prev) => ({
         ...prev,
-        projectType: "Dedicated Cloud Hosting Setup",
+        projectType: `${planName} Plan Enquiry`,
         message: prev.message || `We are interested in exploring the ${planName} plan for our school.`,
       }));
     }
@@ -228,6 +236,7 @@ export default function ContactPage() {
     event.preventDefault();
     if (status.state === "sending") return;
     if (!validate()) return;
+    const form = event.currentTarget;
 
     const honeypot = (event.currentTarget.elements.namedItem("institution_website_check") as HTMLInputElement | null)?.value ?? "";
     if (honeypot) return;
@@ -250,44 +259,30 @@ export default function ContactPage() {
       submittedAt: new Date().toISOString(),
     };
 
-    const mailtoHref = `mailto:${site.contact.email}?subject=${encodeURIComponent(
-      `[IEP Schools Inquiry] ${payload.company} — ${payload.projectType}`,
-    )}&body=${encodeURIComponent(
-      `INSTITUTIONAL ENQUIRY DETAILS\n` +
-        `-----------------------------------------\n` +
-        `School Name: ${payload.company}\n` +
-        `Contact Person: ${payload.name}\n` +
-        `Designation: ${payload.jobTitle}\n` +
-        `Work Email: ${payload.email}\n` +
-        `Phone / WhatsApp: ${payload.phone}\n` +
-        `Area of Interest: ${payload.projectType}\n` +
-        `Student Strength: ${payload.budgetRange}\n` +
-        `Target Timeline: ${payload.timeline}\n` +
-        `Requested Live Demo: ${payload.requestDemo ? "Yes" : "No"}\n` +
-        `Newsletter Subscription: ${payload.newsletter ? "Yes" : "No"}\n\n` +
-        `Message / Requirements:\n${payload.message}\n`,
-    )}`;
-
-    if (!endpoint) {
-      window.location.href = mailtoHref;
-      setStatus({ state: "mailto", href: mailtoHref });
-      return;
-    }
-
     setStatus({ state: "sending" });
     try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 15000);
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
+      const result = await submitWebsiteEnquiry({
+        customerName: payload.name,
+        email: payload.email,
+        phone: payload.phone,
+        schoolName: payload.company,
+        requestType: payload.requestDemo ? "Book a Live Interactive Demo" : payload.projectType,
+        sourcePage: `${({ pricing: "Pricing", hosting: "Hosting", home: "Home", applications: "Applications", features: "Features", portals: "Portals", about: "About", tutorials: "Tutorials", navigation: "Navigation" } as Record<string, string>)[sourceParam ?? ""] ?? "Contact Us"}`,
+        pageUrl: window.location.href,
+        website: honeypot,
+        message: [
+          `Role: ${payload.jobTitle}`,
+          `Student enrollment: ${payload.budgetRange}`,
+          `Target timeline: ${payload.timeline}`,
+          `Requested demo: ${payload.requestDemo ? "Yes" : "No"}`,
+          `Product updates opt-in: ${payload.newsletter ? "Yes" : "No"}`,
+          "Privacy consent: Yes",
+          "",
+          payload.message,
+        ].join("\n"),
       });
-      clearTimeout(timeout);
-      if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
-      setStatus({ state: "sent" });
-      event.currentTarget.reset();
+      setStatus({ state: "dispatched", enquiryId: result.enquiryId });
+      form.reset();
       setFormData({
         name: "",
         email: "",
@@ -302,10 +297,12 @@ export default function ContactPage() {
         newsletter: true,
         consent: false,
       });
-    } catch {
+    } catch (error) {
       setStatus({
         state: "error",
-        message: "We could not submit the form automatically. Please connect directly via WhatsApp or email.",
+        message: error instanceof Error
+          ? error.message
+          : "We could not dispatch your enquiry. Please retry, or contact us directly by WhatsApp or email.",
       });
     }
   };
@@ -379,9 +376,9 @@ export default function ContactPage() {
                     <Server className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-white">Dedicated School Cloud Instance</h3>
+                    <h3 className="text-sm font-bold text-white">Free Hosting Allocation</h3>
                     <p className="mt-0.5 text-xs text-white/65">
-                      6 GB RAM & 10 GB SSD container provisioned per institution on the ₹0 Free tier.
+                      6 GB RAM and 10 GB SSD allocation on shared hosting, subject to fair-use limits.
                     </p>
                   </div>
                 </div>
@@ -403,9 +400,9 @@ export default function ContactPage() {
                     <ShieldCheck className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-white">100% Institutional Data Privacy</h3>
+                    <h3 className="text-sm font-bold text-white">School Data Access</h3>
                     <p className="mt-0.5 text-xs text-white/65">
-                      Isolated database boundaries ensure student and financial records stay strictly confidential.
+                      School records are available through authorized school accounts and user permissions.
                     </p>
                   </div>
                 </div>
@@ -606,15 +603,21 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {status.state === "sent" ? (
-              <div className="rounded-3xl border border-emerald-200 bg-emerald-50/80 p-8 text-center sm:text-left">
+            {status.state === "dispatched" ? (
+              <div className="rounded-3xl border border-emerald-200 bg-emerald-50/90 p-8 text-center sm:text-left shadow-sm">
                 <div className="inline-grid h-12 w-12 place-items-center rounded-2xl bg-emerald-100 text-emerald-700 mb-4">
                   <CheckCircle2 className="h-6 w-6" />
                 </div>
-                <h3 className="text-xl font-bold text-emerald-950">Enquiry Received Successfully!</h3>
-                <p className="mt-2 text-sm leading-relaxed text-emerald-900/80">
-                  Thank you for reaching out. An IEP Schools onboarding coordinator has received your message and will reach out to schedule your walkthrough within 2 business hours.
+                <h3 className="text-xl font-bold text-emerald-950">Enquiry Submitted Successfully!</h3>
+                <p className="mt-2 text-sm leading-relaxed text-emerald-900/90">
+                  Thank you for reaching out to IEP Schools. We have received your details and our education onboarding advisor will connect with you shortly. An acknowledgement has also been dispatched to your email.
                 </p>
+                {status.enquiryId && (
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-xl bg-white/80 px-3.5 py-1.5 text-xs font-medium text-emerald-950 border border-emerald-200/70">
+                    <span className="font-semibold text-emerald-700">Enquiry Reference ID:</span>
+                    <span className="font-mono">{status.enquiryId}</span>
+                  </div>
+                )}
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Button
                     onClick={() => setStatus({ state: "idle" })}
@@ -890,19 +893,6 @@ export default function ContactPage() {
                   </div>
                 )}
 
-                {status.state === "mailto" && (
-                  <div className="rounded-2xl border border-purple-200 bg-purple-50 p-4.5">
-                    <p className="text-sm font-bold text-navy-900">Your email client has been prepared</p>
-                    <p className="mt-1 text-xs leading-5 text-ink/65">
-                      Press Send in your email software to deliver your details directly to our admissions desk.
-                    </p>
-                    <Button href={status.href} variant="outline" size="sm" className="mt-3">
-                      <Mail className="h-4 w-4" />
-                      Open Email App Again
-                    </Button>
-                  </div>
-                )}
-
                 <Button
                   type="submit"
                   size="lg"
@@ -931,34 +921,34 @@ export default function ContactPage() {
 
           {/* Right Sidebar */}
           <aside className="space-y-6">
-            {/* Card 1: Dedicated School Container */}
+            {/* Card 1: Free hosting allocation */}
             <div className="card p-6 sm:p-7 border-purple-100 bg-gradient-to-br from-white via-purple-50/20 to-white">
               <div className="flex items-center gap-3 mb-4">
                 <span className="grid h-10 w-10 place-items-center rounded-xl bg-purple-100 text-purple-700">
                   <Server className="h-5 w-5" />
                 </span>
                 <div>
-                  <h3 className="text-base font-bold text-navy-900">Dedicated Hosting Included</h3>
+                  <h3 className="text-base font-bold text-navy-900">Hosting Included</h3>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100/70 px-2 py-0.5 rounded-full">
-                    Free Tier: 6 GB RAM
+                    Free shared allocation
                   </span>
                 </div>
               </div>
               <p className="text-xs leading-relaxed text-ink/70">
-                Unlike multi-tenant shared systems where school records mix in one database, every IEP Schools client receives a dedicated cloud environment.
+                The Free plan includes a shared hosting allocation sized for schools starting with core ERP workflows. Capacity is subject to fair-use and hosting-provider limits.
               </p>
               <ul className="mt-4 space-y-2 text-xs text-ink/75">
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
-                  <span>Isolated MongoDB database container</span>
+                  <span>School accounts with role-based access</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
-                  <span>Automated daily snapshot backups</span>
+                  <span>Encrypted connections to the website</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
-                  <span>Bank-grade TLS 1.3 encrypted data flow</span>
+                  <span>Support to help with onboarding and setup</span>
                 </li>
               </ul>
             </div>
