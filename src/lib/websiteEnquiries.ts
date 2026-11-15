@@ -38,11 +38,10 @@ function resolveAppsScriptUrl(): string {
 }
 
 /**
- * Dispatch a clean URL-encoded POST to Google Apps Script using fetch (no-cors).
- * Because fetch mode is 'no-cors', the browser sends the submission directly
- * without injecting an iframe into the DOM. This prevents third-party scripts
- * (such as Google's internal 'dymvgb96d.js' echo wrapper) from executing in the
- * document and throwing console errors.
+ * Dispatch a browser-compatible URL-encoded form POST to Apps Script via a hidden sandboxed iframe.
+ * The sandboxed iframe prevents external scripts (such as Google's internal 'dymvgb96d.js')
+ * from executing in the console while ensuring the submission payload is reliably dispatched
+ * and recorded in Google Sheets.
  */
 export async function submitWebsiteEnquiry(payload: WebsiteEnquiryPayload): Promise<{ enquiryId: string }> {
   const action = resolveAppsScriptUrl();
@@ -65,21 +64,7 @@ export async function submitWebsiteEnquiry(payload: WebsiteEnquiryPayload): Prom
     website: payload.website?.trim() ?? "",
   };
 
-  const body = new URLSearchParams(fields).toString();
-
-  try {
-    await fetch(action, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body,
-    });
-  } catch (err) {
-    // If fetch fails (e.g. adblocker or network restriction), use form fallback
-    submitViaHiddenForm(action, fields, enquiryId);
-  }
+  submitViaHiddenForm(action, fields, enquiryId);
 
   return { enquiryId };
 }
@@ -91,6 +76,8 @@ function submitViaHiddenForm(action: string, fields: Record<string, string>, enq
   frame.title = "Enquiry submission target";
   frame.tabIndex = -1;
   frame.setAttribute("aria-hidden", "true");
+  // Allow form submission into iframe, but do NOT grant allow-scripts so third-party echo scripts don't throw in console
+  frame.setAttribute("sandbox", "allow-forms allow-same-origin");
   Object.assign(frame.style, {
     position: "absolute",
     width: "1px",
@@ -121,6 +108,6 @@ function submitViaHiddenForm(action: string, fields: Record<string, string>, enq
     form.submit();
   } finally {
     form.remove();
-    window.setTimeout(() => frame.remove(), 10_000);
+    window.setTimeout(() => frame.remove(), 30_000);
   }
 }
