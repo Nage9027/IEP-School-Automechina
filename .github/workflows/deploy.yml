@@ -43,8 +43,8 @@ jobs:
           CPANEL_USER: ${{ secrets.CPANEL_USER }}
           CPANEL_PASS: ${{ secrets.CPANEL_PASS }}
           CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
-          CPANEL_PORT: ${{ secrets.CPANEL_PORT || '2083' }}
-          CPANEL_DOMAIN: ${{ secrets.ERP_CPANEL_DOMAIN || 'erp.iepsolutions.in' }}
+          CPANEL_PORT: ${{ secrets.CPANEL_PORT }}
+          CPANEL_DOMAIN: ${{ secrets.CPANEL_DOMAIN }}
         run: node scripts/deploy_cpanel.cjs
 
       - name: Verify Live Deployment
