@@ -88,6 +88,28 @@ const storyPillars = [
   },
 ];
 
+// Section: Leadership Team
+const leadershipTeam = [
+  {
+    name: "Nagendra Naidu",
+    role: "Founder",
+    image: "/media/Nagendra.png",
+    alt: "Nagendra Naidu – Founder, IEP Schools",
+  },
+  {
+    name: "Hari Nath",
+    role: "Marketing Manager",
+    image: "/media/Hari%20Nath.png",
+    alt: "Hari Nath – Marketing Manager, IEP Schools",
+  },
+  {
+    name: "Sai Krishna",
+    role: "Co-Founder",
+    image: "/media/Sai%20Krishna%20Png.png",
+    alt: "Sai Krishna – Co-Founder, IEP Schools",
+  },
+];
+
 // Section 4: What IEP Schools Automates - 10 Core Modules
 const automatedModules = [
   {
@@ -418,6 +440,65 @@ export default function AboutPage() {
                 );
               })}
             </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ============ SECTION: LEADERSHIP TEAM ============ */}
+      <Section tone="white" id="leadership" className="py-16 sm:py-20 lg:py-24 relative overflow-hidden">
+        {/* Subtle ambient lavender glow */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 -top-24 -translate-x-1/2 w-[720px] h-[360px] bg-gradient-to-b from-purple-100/50 via-violet-50/25 to-transparent blur-3xl -z-10"
+        />
+
+        <div className="container-x">
+          <SectionHeading
+            eyebrow="Leadership Team"
+            title="Meet the People Behind IEP Schools"
+            description="Driven by innovation, technology and a shared commitment to making school management smarter."
+          />
+
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {leadershipTeam.map((member) => (
+              <div
+                key={member.name}
+                className="group flex flex-col overflow-hidden rounded-3xl border border-purple-100 bg-white shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-purple-300 hover:shadow-card-hover md:last:col-span-2 md:last:max-w-md md:last:mx-auto lg:last:col-span-1 lg:last:max-w-none w-full"
+              >
+                {/* Large Professional Portrait */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-gradient-to-b from-slate-100 to-purple-50/30">
+                  <img
+                    src={member.image}
+                    alt={member.alt}
+                    width={600}
+                    height={750}
+                    loading="lazy"
+                    className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+                </div>
+
+                {/* Profile Details */}
+                <div className="flex flex-1 flex-col justify-between p-6 sm:p-7 bg-white">
+                  <div>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-purple-200/80 bg-purple-50/80 px-3 py-1 text-xs font-bold text-purple-700 tracking-wide">
+                      {member.role}
+                    </span>
+                    <h3 className="mt-3.5 text-xl sm:text-2xl font-extrabold tracking-tight text-navy-900 transition-colors group-hover:text-purple-600">
+                      {member.name}
+                    </h3>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-purple-100/80 flex items-center justify-between text-xs text-ink/60">
+                    <span className="font-semibold text-navy-900/80">IEP Schools</span>
+                    <span className="font-medium text-slate-500">Executive Team</span>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </Section>
