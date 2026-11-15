@@ -28,6 +28,7 @@ jobs:
         env:
           VITE_ERP_LOGIN_URL: "https://sch.iepsolutions.in/login"
           VITE_SITE_URL: "https://erp.iepsolutions.in"
+          VITE_GOOGLE_APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbwLQao1RzK1VKpWzqS0k-xVzAnUNYqO0RO44-CSnIJaUGmZ4R7PrJEC5AokO7LdF-dY/exec"
         run: npm run build
 
       - name: Package Distribution Bundle

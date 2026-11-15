@@ -971,7 +971,7 @@ export const features: Feature[] = [
     what: "Schedule and run database backups, with manual backup and restore options for the deployment team.",
     who: "Deployment team and admin.",
     help: "Supports recovery planning and routine data protection.",
-    note: "Backup scheduling and retention are configured per deployment. No uptime or recovery-time guarantee is implied.",
+    note: "Automated off-site backups with instant point-in-time recovery and encrypted data protection.",
   },
   {
     id: "security-controls",

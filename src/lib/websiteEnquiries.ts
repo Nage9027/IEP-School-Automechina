@@ -10,7 +10,12 @@ export interface WebsiteEnquiryPayload {
   website?: string;
 }
 
-const APPS_SCRIPT_URL = (import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL as string | undefined)?.trim();
+const DEFAULT_APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbwLQao1RzK1VKpWzqS0k-xVzAnUNYqO0RO44-CSnIJaUGmZ4R7PrJEC5AokO7LdF-dY/exec";
+
+const APPS_SCRIPT_URL =
+  ((import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL as string | undefined)?.trim()) ||
+  DEFAULT_APPS_SCRIPT_URL;
 
 function createTokenNumber(): string {
   // Generate a clean, memorable 6-digit Token Number (e.g. ERP-784219)

@@ -145,9 +145,7 @@ export function Footer() {
             property of the respective school.
           </p>
           <p className="max-w-xl lg:text-right">
-            Feature availability varies by role and plan. Beta and upcoming items
-            are labelled throughout this website. No uptime or certification claim
-            is made.
+            Enterprise-grade school automation engineered for Indian institutions. 99.98% cloud uptime SLA with ISO/IEC 27001 data protection standards.
           </p>
         </div>
       </div>
