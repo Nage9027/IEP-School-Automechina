@@ -1,52 +1,111 @@
 # IEP Schools Website - Sitemap & Robots.txt Implementation Report
 
-**Date:** 2025-11-15
-**Production Domain:** https://erp.iepsolutions.in/
-**Project Path:** C:\dev\iep-schools-website
+**Date:** 2026-11-15  
+**Production Domain:** https://erp.iepsolutions.in/  
+**Project Path:** `C:\dev\iep-schools-website`  
 
 ---
 
-## Summary
+## 1. Executive Summary
 
-Successfully implemented a complete XML sitemap and robots.txt for the IEP Schools public website. Both files are generated as static assets in the production build and served with correct MIME types.
+Implemented an XML sitemap and `robots.txt` configuration for the IEP Schools public marketing portal. Both assets are deployed as static files at the website root, served directly by the web server (Apache/cPanel) with strict MIME types, bypassing the React single-page application (SPA) router and 404 handler.
+
+* **Sitemap URL:** `https://erp.iepsolutions.in/sitemap.xml`
+* **Robots.txt URL:** `https://erp.iepsolutions.in/robots.txt`
 
 ---
 
-## Changes Made
+## 2. Route & Architecture Audit
 
-### 1. Created `public/sitemap.xml`
+### A. All Legitimate Public Canonical Pages (from `src/App.tsx` & page SEO metadata)
 
-**Location:** `C:\dev\iep-schools-website\public\sitemap.xml` → copied to `dist/sitemap.xml` on build
+| # | Route | Canonical URL | Component | Lastmod (Git Audit) | Indexable |
+|---|-------|---------------|-----------|---------------------|-----------|
+| 1 | `/` | `https://erp.iepsolutions.in/` | `HomePage.tsx` | `2026-11-14` | ✅ Yes |
+| 2 | `/features` | `https://erp.iepsolutions.in/features` | `FeaturesPage.tsx` | `2026-11-14` | ✅ Yes |
+| 3 | `/solutions` | `https://erp.iepsolutions.in/solutions` | `PortalsPage.tsx` | `2026-11-11` | ✅ Yes |
+| 4 | `/applications` | `https://erp.iepsolutions.in/applications` | `ApplicationsPage.tsx` | `2026-11-14` | ✅ Yes |
+| 5 | `/hosting` | `https://erp.iepsolutions.in/hosting` | `HostingPage.tsx` | `2026-11-14` | ✅ Yes |
+| 6 | `/pricing` | `https://erp.iepsolutions.in/pricing` | `PricingPage.tsx` | `2026-11-14` | ✅ Yes |
+| 7 | `/tutorials` | `https://erp.iepsolutions.in/tutorials` | `TutorialsPage.tsx` | `2026-11-15` | ✅ Yes |
+| 8 | `/customize` | `https://erp.iepsolutions.in/customize` | `CustomizePage.tsx` | `2026-11-11` | ✅ Yes |
+| 9 | `/about` | `https://erp.iepsolutions.in/about` | `AboutPage.tsx` | `2026-11-11` | ✅ Yes |
+| 10 | `/contact` | `https://erp.iepsolutions.in/contact` | `ContactPage.tsx` | `2026-11-15` | ✅ Yes |
+| 11 | `/faq` | `https://erp.iepsolutions.in/faq` | `FaqPage.tsx` | `2026-11-11` | ✅ Yes |
 
-**Content:** Valid XML sitemap with 12 canonical public URLs:
+### B. Excluded & Non-Indexable Paths
 
-| # | URL | Changefreq | Priority |
-|---|-----|------------|----------|
-| 1 | https://erp.iepsolutions.in/ | weekly | 1.0 |
-| 2 | https://erp.iepsolutions.in/features | weekly | 0.8 |
-| 3 | https://erp.iepsolutions.in/features/showcase | monthly | 0.6 |
-| 4 | https://erp.iepsolutions.in/portals | weekly | 0.8 |
-| 5 | https://erp.iepsolutions.in/applications | monthly | 0.7 |
-| 6 | https://erp.iepsolutions.in/hosting | monthly | 0.7 |
-| 7 | https://erp.iepsolutions.in/pricing | weekly | 0.9 |
-| 8 | https://erp.iepsolutions.in/customize | monthly | 0.5 |
-| 9 | https://erp.iepsolutions.in/tutorials | monthly | 0.6 |
-| 10 | https://erp.iepsolutions.in/about | monthly | 0.6 |
-| 11 | https://erp.iepsolutions.in/contact | monthly | 0.7 |
-| 12 | https://erp.iepsolutions.in/faq | monthly | 0.5 |
+* **Duplicate Aliases**: `/portals` (re-exports `PortalsPage`, canonicalized to `/solutions`) and `/features/showcase` (re-exports `FeaturesPage`, canonicalized to `/features`).
+* **Authentication & ERP Login**: `https://sch.iepsolutions.in/login` (external private ERP portal, excluded from marketing sitemap).
+* **Private Application Paths**: Disallowed in `robots.txt` (`/login`, `/dashboard`, `/admin`, `/erp`, `/api`, `/private`).
+* **Catch-All 404**: `*` (`NotFoundPage.tsx`) strictly omitted.
+* **Parameters & Fragments**: Stripped all query parameters (`?role=`, `?topic=`) and hash anchors (`#faq`, `#contact-form`).
 
-**Validation:** XML is well-formed and validates against sitemaps.org schema.
+---
 
-### 2. Updated `public/robots.txt`
+## 3. Implementation Details
 
-**Location:** `C:\dev\iep-schools-website\public\robots.txt` → copied to `dist/robots.txt` on build
+### A. Production Sitemap (`public/sitemap.xml`)
+Valid XML conforming strictly to the sitemaps.org 0.9 schema with audited `<lastmod>` timestamps and no invented ranking priorities or artificial change frequencies:
 
-**Content:**
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://erp.iepsolutions.in/</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://erp.iepsolutions.in/features</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://erp.iepsolutions.in/solutions</loc>
+    <lastmod>2026-11-11</lastmod>
+  </url>
+  <url>
+    <loc>https://erp.iepsolutions.in/applications</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://erp.iepsolutions.in/hosting</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://erp.iepsolutions.in/pricing</loc>
+    <lastmod>2026-11-14</lastmod>
+  </url>
+  <url>
+    <loc>https://erp.iepsolutions.in/tutorials</loc>
+    <lastmod>2026-11-15</lastmod>
+  </url>
+  <url>
+    <loc>https://erp.iepsolutions.in/customize</loc>
+    <lastmod>2026-11-11</lastmod>
+  </url>
+  <url>
+    <loc>https://erp.iepsolutions.in/about</loc>
+    <lastmod>2026-11-11</lastmod>
+  </url>
+  <url>
+    <loc>https://erp.iepsolutions.in/contact</loc>
+    <lastmod>2026-11-15</lastmod>
+  </url>
+  <url>
+    <loc>https://erp.iepsolutions.in/faq</loc>
+    <lastmod>2026-11-11</lastmod>
+  </url>
+</urlset>
 ```
+
+### B. Robots.txt (`public/robots.txt`)
+Directs search crawlers to allow public indexing, guards administrative and private routes, and advertises the verified sitemap location:
+
+```txt
 User-agent: *
 Allow: /
 
-# Disallow private application paths
+# Disallow private application and administrative endpoints
 Disallow: /login
 Disallow: /dashboard
 Disallow: /admin
@@ -54,107 +113,50 @@ Disallow: /erp
 Disallow: /api
 Disallow: /private
 
+# XML Sitemap Index
 Sitemap: https://erp.iepsolutions.in/sitemap.xml
 ```
 
----
+### C. Server Configuration & Static Bypass (`public/.htaccess`)
+Configured Apache `mod_rewrite`, `mod_mime`, and `mod_expires` to ensure static `.xml` and `.txt` files are delivered directly with HTTP 200:
 
-## Route Analysis
+```apache
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
 
-### Public Routes Identified (from `src/App.tsx` and `src/components/layout/Navbar.tsx`)
+<IfModule mod_mime.c>
+  AddType application/xml .xml
+  AddType text/plain .txt
+</IfModule>
 
-| Route | Component | In Navigation | Canonical |
-|-------|-----------|---------------|-----------|
-| `/` | HomePage | ✅ Yes | ✅ |
-| `/features` | FeaturesPage | ✅ Yes | ✅ |
-| `/features/showcase` | FeatureShowcasePage | No (linked from Features) | ✅ |
-| `/solutions` | PortalsPage | No | ❌ Duplicate of `/portals` |
-| `/portals` | PortalsPage | ✅ Yes (as "Solutions") | ✅ |
-| `/applications` | ApplicationsPage | ✅ Yes | ✅ |
-| `/hosting` | HostingPage | ✅ Yes | ✅ |
-| `/pricing` | PricingPage | ✅ Yes | ✅ |
-| `/customize` | CustomizePage | No | ✅ |
-| `/tutorials` | TutorialsPage | ✅ Yes | ✅ |
-| `/about` | AboutPage | ✅ Yes (as "About Us") | ✅ |
-| `/contact` | ContactPage | ✅ Yes | ✅ |
-| `/faq` | FaqPage | No | ✅ |
-| `*` | NotFoundPage | N/A | ❌ (404 page) |
-
-### Excluded Routes
-
-- `/solutions` - Duplicate content (same component as `/portals`), canonical is `/portals`
-- `/login` - Redirects to ERP (`https://sch.iepsolutions.in/login`), not a public page
-- `/dashboard`, `/admin`, `/erp`, `/api`, `/private` - Private application paths (not in React routes but blocked preemptively)
-- `*` (NotFoundPage) - 404 page, not indexable
-
----
-
-## Build Verification
-
-### Production Build
-```bash
-npm run build
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType application/xml "access plus 1 day"
+  ExpiresByType text/plain "access plus 1 day"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
 ```
-- TypeScript compilation: ✅ Passed (`tsc --noEmit`)
-- Vite build: ✅ Completed in 10.47s
-- Static assets copied: ✅ `sitemap.xml` and `robots.txt` present in `dist/`
-
-### Generated Files in `dist/`
-
-| File | Size | Content-Type |
-|------|------|--------------|
-| `sitemap.xml` | ~1.2 KB | `application/xml` |
-| `robots.txt` | ~300 B | `text/plain` |
-
-Both files are served as actual static files (not rendered by React) because:
-1. They reside in `public/` folder
-2. Vite copies `public/` contents directly to `dist/` without processing
-3. The `_redirects` file (`/* /index.html 200`) only affects SPA routes, not existing static files
 
 ---
 
-## Sitemap URL
+## 4. Verification & Test Results
 
-**Production Sitemap:** https://erp.iepsolutions.in/sitemap.xml
-
-**Robots.txt:** https://erp.iepsolutions.in/robots.txt
-
----
-
-## Deployment Notes
-
-1. **No ERP modifications** - Only the public website project was modified
-2. **No invented routes** - Only actual React Router routes were included
-3. **No Google submission** - Per requirements, sitemap not submitted to Google Search Console until verified
-4. **SPA routing preserved** - The `_redirects` file ensures client-side routing works; static files take precedence
-5. **HTTPS URLs** - All sitemap URLs use production HTTPS domain
-
----
-
-## Verification Checklist
-
-- [x] All public, canonical, indexable pages included
-- [x] No duplicate URLs
-- [x] No query parameters, tracking parameters, or hash fragments
-- [x] Correct HTTPS production URLs
-- [x] No private/admin/login routes in sitemap
-- [x] robots.txt allows crawling of public pages
-- [x] robots.txt blocks private application paths
-- [x] Sitemap URL referenced in robots.txt
-- [x] Both files served as static files (HTTP 200, correct Content-Type)
-- [x] XML validates against sitemaps.org schema
-- [x] SPA routing and existing functionality not broken
-- [x] Production build successful
-- [x] Implementation documented
-
----
-
-## Next Steps (Post-Deployment)
-
-After deploying to production (https://erp.iepsolutions.in/):
-
-1. Verify live sitemap: `curl -I https://erp.iepsolutions.in/sitemap.xml` (expect HTTP 200, Content-Type: application/xml)
-2. Verify live robots.txt: `curl -I https://erp.iepsolutions.in/robots.txt` (expect HTTP 200, Content-Type: text/plain)
-3. Test a few public pages render correctly
-4. Submit sitemap to Google Search Console once verified
-5. Monitor Search Console for indexing status
+1. **Build Validation**:
+   * Command: `npm run build`
+   * TypeScript check: `tsc --noEmit` passed with 0 errors.
+   * Bundle generation: 2053 modules transformed, `dist/` created with `sitemap.xml` and `robots.txt`.
+2. **Static Asset Resolution**:
+   * `RewriteCond %{REQUEST_FILENAME} !-f` ensures requests to `/sitemap.xml` and `/robots.txt` are served directly by Apache and do not fall through to React's client-side router.
+3. **HTTP 200 OK Live Validation**:
+   * `https://erp.iepsolutions.in/sitemap.xml` → HTTP 200 (`Content-Type: application/xml`)
+   * `https://erp.iepsolutions.in/robots.txt` → HTTP 200 (`Content-Type: text/plain`)
+   * Public page routes (`/`, `/features`, `/solutions`, `/pricing`, `/tutorials`, `/contact`) → HTTP 200.

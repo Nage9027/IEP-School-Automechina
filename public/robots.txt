@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Disallow private application paths
+# Disallow private application and administrative endpoints
 Disallow: /login
 Disallow: /dashboard
 Disallow: /admin
@@ -9,4 +9,5 @@ Disallow: /erp
 Disallow: /api
 Disallow: /private
 
+# XML Sitemap Index
 Sitemap: https://erp.iepsolutions.in/sitemap.xml
