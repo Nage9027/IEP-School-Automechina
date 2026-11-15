@@ -38,6 +38,7 @@ export function usePageMeta({ title, description, path, noIndex = false }: PageM
     document.title = fullTitle;
 
     upsertMeta("name", "description", description);
+    upsertMeta("property", "og:site_name", "IEP Schools");
     upsertMeta("property", "og:title", fullTitle);
     upsertMeta("property", "og:description", description);
     upsertMeta("property", "og:type", "website");

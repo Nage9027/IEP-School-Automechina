@@ -227,6 +227,8 @@ async function main() {
 <IfModule mod_mime.c>
   AddType application/xml .xml
   AddType text/plain .txt
+  AddType image/x-icon .ico
+  AddType image/png .png
 </IfModule>
 
 <IfModule mod_expires.c>
