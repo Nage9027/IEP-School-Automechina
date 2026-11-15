@@ -146,6 +146,14 @@ const tutorialHeroPlaylist = [
     tag: "Attendance & Work",
     description: "Daily roll-call marking, automated parent absence alerts, and monthly attendance registers.",
   },
+  {
+    id: "academics-hub",
+    title: "Day 8: Academics Hub & Timetable Management",
+    duration: "01:22",
+    src: "/media/IEP%20DAY%208%20Academics%20Hub.mp4",
+    tag: "Academics Hub",
+    description: "Curriculum planning, class & subject mappings, conflict-free timetable generation, and lesson plans.",
+  },
 ];
 
 export default function TutorialsPage() {
@@ -618,7 +626,7 @@ export default function TutorialsPage() {
                   </div>
 
                   {/* Horizontal Playlist Selector Pills */}
-                  <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4 lg:grid-cols-8">
+                  <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9">
                     {tutorialHeroPlaylist.map((item, idx) => {
                       const isActive = idx === heroPlaylistIndex;
                       return (

@@ -412,6 +412,47 @@ export const tutorials: Tutorial[] = [
       },
     ],
   },
+  {
+    id: "academics-hub",
+    title: "Academics Hub & Curriculum Management: Timetable & Lesson Plans",
+    description:
+      "Master academic operations: curriculum planning, class-subject allocation, automated conflict-free timetable scheduling, syllabus progress tracking, and lesson plans.",
+    categoryId: "academics",
+    level: "Intermediate",
+    duration: "01:22",
+    videoUrl: "/media/IEP%20DAY%208%20Academics%20Hub.mp4",
+    thumbnailUrl: "/media/Images/Modern School Management Illustration.png",
+    published: true,
+    role: "Principal, Academic Coordinator & Teacher",
+    keyTakeaways: [
+      "Configuring subject hierarchies, credit hours, and curriculum syllabus outlines",
+      "Assigning subject teachers and period quotas across primary and secondary divisions",
+      "Conflict-free timetable generation for classrooms, teachers, and specialty labs",
+      "Monitoring real-time lesson plan execution, chapter completions, and teacher diaries",
+    ],
+    steps: [
+      {
+        step: 1,
+        title: "Open Academics Hub",
+        instruction: "Navigate to Academics > Curriculum & Subjects to define core subjects, electives, and weekly period requirements.",
+      },
+      {
+        step: 2,
+        title: "Allocate Teacher-Subject Mappings",
+        instruction: "Assign verified faculty to class sections while respecting maximum weekly workload limits.",
+      },
+      {
+        step: 3,
+        title: "Generate Institutional Timetable",
+        instruction: "Use the smart scheduling matrix to produce conflict-free timetables for classes, teacher rooms, and computer labs.",
+      },
+      {
+        step: 4,
+        title: "Track Lesson Plans & Syllabus Milestones",
+        instruction: "Review weekly teacher lesson submissions and verify syllabus completion ahead of term examinations.",
+      },
+    ],
+  },
 ];
 
 export const productFilms: ProductFilm[] = [
@@ -450,6 +491,15 @@ export const productFilms: ProductFilm[] = [
     duration: "01:20",
     src: "/media/IEP%20DAY%207%20Attendence%20%26%20Work.mp4",
     tag: "Attendance",
+  },
+  {
+    id: "academics-hub",
+    title: "Academics hub and curriculum management",
+    description:
+      "Class-subject allocations, conflict-free timetable scheduling, syllabus progress, and daily lesson plans.",
+    duration: "01:22",
+    src: "/media/IEP%20DAY%208%20Academics%20Hub.mp4",
+    tag: "Academics",
   },
   {
     id: "student-management",

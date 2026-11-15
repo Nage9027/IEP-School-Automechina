@@ -52,6 +52,27 @@ export const heroVideoPlaylist: HeroPlaylistItem[] = [
     description: "Unified web ERP application, connected records and school management workflow.",
   },
   {
+    id: "teachers-staff",
+    title: "Teachers & Staff Administration",
+    tag: "Staff Management",
+    src: "/media/IEP%20DAY%206%20TEACHERS%20AND%20STAFF.mp4",
+    description: "Faculty management, subject allocations, class teachers and staff coordination.",
+  },
+  {
+    id: "attendance-work",
+    title: "Student Attendance & Daily Workflows",
+    tag: "Attendance & Work",
+    src: "/media/IEP%20DAY%207%20Attendence%20%26%20Work.mp4",
+    description: "Daily roll-call marking, automated parent absence alerts, and monthly registers.",
+  },
+  {
+    id: "academics-hub",
+    title: "Academics Hub & Timetable Scheduling",
+    tag: "Academics Hub",
+    src: "/media/IEP%20DAY%208%20Academics%20Hub.mp4",
+    description: "Curriculum planning, class & subject mappings, conflict-free timetable generation.",
+  },
+  {
     id: "student-lifecycle",
     title: "Student Management & Admissions",
     tag: "Student Lifecycle",
