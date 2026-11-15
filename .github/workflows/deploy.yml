@@ -1,0 +1,58 @@
+name: Deploy IEP Schools Website to erp.iepsolutions.in
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Build & Deploy to erp.iepsolutions.in
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Production Bundle
+        env:
+          VITE_ERP_LOGIN_URL: "https://sch.iepsolutions.in/login"
+          VITE_SITE_URL: "https://erp.iepsolutions.in"
+        run: npm run build
+
+      - name: Package Distribution Bundle
+        run: |
+          cd dist
+          zip -r ../erp_dist.zip .
+          cd ..
+
+      - name: Deploy to cPanel (erp.iepsolutions.in)
+        env:
+          CPANEL: ${{ secrets.CPANEL || secrets.cpanel }}
+          CPANEL_AUTH_HEADER: ${{ secrets.CPANEL_AUTH_HEADER }}
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}
+          CPANEL_PASS: ${{ secrets.CPANEL_PASS }}
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+          CPANEL_PORT: ${{ secrets.CPANEL_PORT || '2083' }}
+          CPANEL_DOMAIN: ${{ secrets.ERP_CPANEL_DOMAIN || 'erp.iepsolutions.in' }}
+        run: node scripts/deploy_cpanel.cjs
+
+      - name: Verify Live Deployment
+        run: |
+          echo "Verifying erp.iepsolutions.in root..."
+          curl -f -k -sS https://erp.iepsolutions.in/ > /dev/null
+          echo "Verifying SPA rewrite /features..."
+          curl -f -k -sS https://erp.iepsolutions.in/features > /dev/null
+          echo "Verifying SPA rewrite /tutorials..."
+          curl -f -k -sS https://erp.iepsolutions.in/tutorials > /dev/null
+          echo "✅ Production deployment active and verified on https://erp.iepsolutions.in"
