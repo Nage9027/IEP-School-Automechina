@@ -38,12 +38,13 @@ function resolveAppsScriptUrl(): string {
 }
 
 /**
- * Dispatch a browser-compatible URL-encoded form POST to Apps Script.
- * Apps Script is cross-origin, so the browser cannot read its response. A
- * successful return from this function means only that the browser submitted
- * the form; it does not confirm a sheet row or either email delivery.
+ * Dispatch a clean URL-encoded POST to Google Apps Script using fetch (no-cors).
+ * Because fetch mode is 'no-cors', the browser sends the submission directly
+ * without injecting an iframe into the DOM. This prevents third-party scripts
+ * (such as Google's internal 'dymvgb96d.js' echo wrapper) from executing in the
+ * document and throwing console errors.
  */
-export function submitWebsiteEnquiry(payload: WebsiteEnquiryPayload): { enquiryId: string } {
+export async function submitWebsiteEnquiry(payload: WebsiteEnquiryPayload): Promise<{ enquiryId: string }> {
   const action = resolveAppsScriptUrl();
   if (typeof navigator !== "undefined" && !navigator.onLine) {
     throw new Error("You appear to be offline. Reconnect and try again.");
@@ -64,6 +65,26 @@ export function submitWebsiteEnquiry(payload: WebsiteEnquiryPayload): { enquiryI
     website: payload.website?.trim() ?? "",
   };
 
+  const body = new URLSearchParams(fields).toString();
+
+  try {
+    await fetch(action, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body,
+    });
+  } catch (err) {
+    // If fetch fails (e.g. adblocker or network restriction), use form fallback
+    submitViaHiddenForm(action, fields, enquiryId);
+  }
+
+  return { enquiryId };
+}
+
+function submitViaHiddenForm(action: string, fields: Record<string, string>, enquiryId: string): void {
   const frameName = `iep-enquiry-target-${enquiryId.replace(/[^A-Za-z0-9_-]/g, "")}`;
   const frame = document.createElement("iframe");
   frame.name = frameName;
@@ -98,14 +119,8 @@ export function submitWebsiteEnquiry(payload: WebsiteEnquiryPayload): { enquiryI
   document.body.append(frame, form);
   try {
     form.submit();
-  } catch {
-    frame.remove();
+  } finally {
     form.remove();
-    throw new Error("Your enquiry could not be dispatched. Please try again or contact us directly.");
+    window.setTimeout(() => frame.remove(), 10_000);
   }
-  form.remove();
-
-  // Keep the target alive long enough for the request and its redirect to finish.
-  window.setTimeout(() => frame.remove(), 120_000);
-  return { enquiryId };
 }
