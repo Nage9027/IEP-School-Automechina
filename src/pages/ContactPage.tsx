@@ -613,9 +613,9 @@ export default function ContactPage() {
                   Thank you for reaching out to IEP Schools. We have received your details and our education onboarding advisor will connect with you shortly. An acknowledgement has also been dispatched to your email.
                 </p>
                 {status.enquiryId && (
-                  <div className="mt-4 inline-flex items-center gap-2 rounded-xl bg-white/80 px-3.5 py-1.5 text-xs font-medium text-emerald-950 border border-emerald-200/70">
-                    <span className="font-semibold text-emerald-700">Enquiry Reference ID:</span>
-                    <span className="font-mono">{status.enquiryId}</span>
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-xl bg-white/90 px-4 py-2 text-sm font-medium text-emerald-950 border border-emerald-200 shadow-sm">
+                    <span className="font-semibold text-emerald-700">Token Number:</span>
+                    <span className="font-mono font-bold text-base text-navy-950 tracking-wide">{status.enquiryId}</span>
                   </div>
                 )}
                 <div className="mt-6 flex flex-wrap gap-3">

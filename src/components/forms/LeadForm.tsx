@@ -174,9 +174,9 @@ export function LeadForm({
             Thank you for contacting IEP Schools. Our team will review your inquiry and connect with you shortly. An acknowledgement has also been dispatched to your email.
           </p>
           {status.enquiryId && (
-            <div className="mt-3 inline-flex items-center gap-2 rounded-lg bg-white/80 px-3 py-1 text-xs text-emerald-950 border border-emerald-200">
-              <span className="font-semibold text-emerald-700">Reference ID:</span>
-              <span className="font-mono">{status.enquiryId}</span>
+            <div className="mt-3 inline-flex items-center gap-2 rounded-lg bg-white/90 px-3.5 py-1.5 text-xs text-emerald-950 border border-emerald-200 shadow-sm">
+              <span className="font-semibold text-emerald-700">Token Number:</span>
+              <span className="font-mono font-bold text-sm text-navy-950 tracking-wide">{status.enquiryId}</span>
             </div>
           )}
         </div>

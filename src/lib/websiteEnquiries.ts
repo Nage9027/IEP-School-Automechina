@@ -12,10 +12,10 @@ export interface WebsiteEnquiryPayload {
 
 const APPS_SCRIPT_URL = (import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL as string | undefined)?.trim();
 
-function createEnquiryId(): string {
-  const randomId = globalThis.crypto?.randomUUID?.()
-    ?? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
-  return `IEP-WEB-${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${randomId}`;
+function createTokenNumber(): string {
+  // Generate a clean, memorable 6-digit Token Number (e.g. ERP-784219)
+  const randomDigits = Math.floor(100000 + Math.random() * 900000);
+  return `ERP-${randomDigits}`;
 }
 
 function resolveAppsScriptUrl(): string {
@@ -50,7 +50,7 @@ export async function submitWebsiteEnquiry(payload: WebsiteEnquiryPayload): Prom
     throw new Error("You appear to be offline. Reconnect and try again.");
   }
 
-  const enquiryId = createEnquiryId();
+  const enquiryId = createTokenNumber();
   const fields: Record<string, string> = {
     enquiryId,
     submittedDate: new Date().toISOString(),
