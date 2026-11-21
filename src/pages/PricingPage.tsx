@@ -419,7 +419,7 @@ export default function PricingPage() {
                   </span>
                   <div>
                     <span className="block leading-tight">School Management ERP</span>
-                    <span className="text-[10px] font-normal text-purple-200/70">11+ Portals & 20+ Modules</span>
+                    <span className="text-[10px] font-normal text-purple-200/70">12+ Portals & 22+ Modules</span>
                   </div>
                 </div>
 

@@ -43,10 +43,10 @@ function resolveAppsScriptUrl(): string {
 }
 
 /**
- * Dispatch a browser-compatible URL-encoded form POST to Apps Script via a hidden sandboxed iframe.
- * The sandboxed iframe prevents external scripts (such as Google's internal 'dymvgb96d.js')
- * from executing in the console while ensuring the submission payload is reliably dispatched
- * and recorded in Google Sheets.
+ * Dispatch a clean URL-encoded POST to Google Apps Script using fetch (no-cors).
+ * Because fetch mode is 'no-cors', the browser directly dispatches the HTTP request
+ * without iframe sandboxing issues, and Google Apps Script reliably executes doPost()
+ * to record the row in Google Sheets and dispatch confirmation emails.
  */
 export async function submitWebsiteEnquiry(payload: WebsiteEnquiryPayload): Promise<{ enquiryId: string }> {
   const action = resolveAppsScriptUrl();
@@ -69,22 +69,39 @@ export async function submitWebsiteEnquiry(payload: WebsiteEnquiryPayload): Prom
     website: payload.website?.trim() ?? "",
   };
 
-  submitViaHiddenForm(action, fields, enquiryId);
+  const body = new URLSearchParams(fields).toString();
+
+  try {
+    await fetch(action, {
+      method: "POST",
+      mode: "no-cors",
+      cache: "no-cache",
+      credentials: "omit",
+      keepalive: true,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body,
+    });
+  } catch (err) {
+    // If fetch is blocked by an adblocker or extension, fallback to hidden form dispatch
+    submitViaHiddenForm(action, fields, enquiryId);
+  }
 
   return { enquiryId };
 }
 
 function submitViaHiddenForm(action: string, fields: Record<string, string>, enquiryId: string): void {
-  const frameName = `iep-enquiry-target-${enquiryId.replace(/[^A-Za-z0-9_-]/g, "")}`;
+  const frameName = `iep-enquiry-target-${enquiryId.replace(/[^A-Za-z0-9_-]/g, "")}-${Date.now()}`;
   const frame = document.createElement("iframe");
   frame.name = frameName;
   frame.title = "Enquiry submission target";
   frame.tabIndex = -1;
   frame.setAttribute("aria-hidden", "true");
-  // Allow form submission into iframe, but do NOT grant allow-scripts so third-party echo scripts don't throw in console
-  frame.setAttribute("sandbox", "allow-forms allow-same-origin");
   Object.assign(frame.style, {
-    position: "absolute",
+    position: "fixed",
+    top: "-9999px",
+    left: "-9999px",
     width: "1px",
     height: "1px",
     border: "0",
@@ -108,7 +125,8 @@ function submitViaHiddenForm(action: string, fields: Record<string, string>, enq
     form.appendChild(input);
   }
 
-  document.body.append(frame, form);
+  document.body.appendChild(frame);
+  document.body.appendChild(form);
   try {
     form.submit();
   } finally {

@@ -50,6 +50,8 @@ const moduleOrder = [
   "attendance",
   "exams",
   "finance",
+  "id-cards",
+  "inventory",
   "transport",
   "communication",
   "ai",
@@ -61,6 +63,8 @@ const portalOrder = [
   "parent",
   "principal",
   "finance",
+  "inventory_manager",
+  "storekeeper",
   "driver",
   "cashier",
 ];

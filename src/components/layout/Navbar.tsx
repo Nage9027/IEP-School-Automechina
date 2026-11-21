@@ -3,15 +3,18 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import {
   ArrowRight,
   BookOpen,
+  Boxes,
   Bus,
   CalendarCheck,
   CalendarDays,
   ChevronDown,
   Globe,
   GraduationCap,
+  IdCard,
   LogIn,
   Menu,
   Monitor,
+  PackageCheck,
   School,
   Smartphone,
   UserCheck,
@@ -60,6 +63,18 @@ const featureLinks = [
     href: "/features#module-transport",
     icon: Bus,
   },
+  {
+    title: "Student ID Cards & Studio",
+    description: "Template library, visual designer, photo cropping & QR verification",
+    href: "/features#module-id-cards",
+    icon: IdCard,
+  },
+  {
+    title: "Inventory & School Store",
+    description: "Stock ledger, size variants, supplier POs, GRN & counter POS",
+    href: "/features#module-inventory",
+    icon: Boxes,
+  },
 ];
 
 const portalLinks = [
@@ -86,6 +101,18 @@ const portalLinks = [
     description: "Point-of-sale fee collections, receipt printing & daily cash ledger",
     href: "/portals?role=cashier",
     icon: Wallet,
+  },
+  {
+    title: "Inventory Manager",
+    description: "Stock catalog, supplier purchasing, warehouse transfers & store POS",
+    href: "/portals?role=inventory_manager",
+    icon: Boxes,
+  },
+  {
+    title: "Storekeeper Console",
+    description: "Receiving goods (GRN), issuing uniforms/books & physical count audits",
+    href: "/portals?role=storekeeper",
+    icon: PackageCheck,
   },
   {
     title: "Driver Companion",

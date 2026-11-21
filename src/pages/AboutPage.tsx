@@ -10,11 +10,14 @@ import {
   ClipboardList,
   Compass,
   Database,
+  Facebook,
   GraduationCap,
   HardDrive,
   Heart,
+  Instagram,
   LayoutDashboard,
   Library,
+  Linkedin,
   Lock,
   Mail,
   MapPin,
@@ -28,8 +31,10 @@ import {
   Sparkles,
   Target,
   TrendingUp,
+  Twitter,
   Users,
   Wallet,
+  Youtube,
   Zap,
 } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -884,22 +889,72 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2.5">
               <a
                 href={`mailto:${site.contact.email}`}
-                className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white px-4 py-2 text-xs font-bold text-navy-900 hover:text-purple-600 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-white px-3.5 py-1.5 text-xs font-bold text-navy-900 hover:text-purple-600 transition-colors shadow-sm"
               >
-                <Mail className="h-4 w-4 text-purple-600" />
+                <Mail className="h-3.5 w-3.5 text-purple-600" />
                 {site.contact.email}
               </a>
               <a
                 href={site.contact.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-4 py-2 text-xs font-bold text-purple-700 hover:bg-purple-100 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-xs font-bold text-emerald-800 hover:bg-emerald-100 transition-colors shadow-sm"
               >
-                <MessageCircle className="h-4 w-4 text-purple-600" />
-                WhatsApp Chat
+                <MessageCircle className="h-3.5 w-3.5 text-emerald-600" />
+                WhatsApp
+              </a>
+              <a
+                href={site.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-pink-200 bg-pink-50 px-3.5 py-1.5 text-xs font-bold text-pink-800 hover:bg-pink-100 transition-colors shadow-sm"
+                title="Official Instagram"
+              >
+                <Instagram className="h-3.5 w-3.5 text-pink-600" />
+                Instagram
+              </a>
+              <a
+                href={site.social.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-3.5 py-1.5 text-xs font-bold text-red-800 hover:bg-red-100 transition-colors shadow-sm"
+                title="Official YouTube Channel"
+              >
+                <Youtube className="h-3.5 w-3.5 text-red-600" />
+                YouTube
+              </a>
+              <a
+                href={site.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 text-xs font-bold text-blue-800 hover:bg-blue-100 transition-colors shadow-sm"
+                title="Official Facebook Page"
+              >
+                <Facebook className="h-3.5 w-3.5 text-blue-600" />
+                Facebook
+              </a>
+              <a
+                href={site.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-3.5 py-1.5 text-xs font-bold text-sky-800 hover:bg-sky-100 transition-colors shadow-sm"
+                title="Official LinkedIn Profile"
+              >
+                <Linkedin className="h-3.5 w-3.5 text-sky-600" />
+                LinkedIn
+              </a>
+              <a
+                href={site.social.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-slate-100 px-3.5 py-1.5 text-xs font-bold text-slate-800 hover:bg-slate-200 transition-colors shadow-sm"
+                title="Official X (Twitter) Account"
+              >
+                <Twitter className="h-3.5 w-3.5 text-slate-700" />
+                X (Twitter)
               </a>
             </div>
           </div>

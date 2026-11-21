@@ -1,5 +1,16 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import {
+  ArrowUpRight,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Twitter,
+  Youtube,
+} from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { useSiteContent } from "@/lib/content";
 
@@ -47,6 +58,75 @@ export function Footer() {
               <span className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1.5 text-[11px] font-semibold text-violet-300">
                 School Automation
               </span>
+            </div>
+
+            {/* Official Social Media Presence */}
+            <div className="mt-7 pt-5 border-t border-white/10">
+              <p className="text-xs font-bold uppercase tracking-wider text-white/50 mb-3">
+                Official Channels & Community
+              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                <a
+                  href={site.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-pink-500/30 bg-pink-500/10 hover:bg-pink-500/20 text-pink-300 text-xs font-semibold transition shadow-sm"
+                  title="Official Instagram @iepsolutions7"
+                >
+                  <Instagram className="h-3.5 w-3.5 text-pink-400" />
+                  Instagram
+                </a>
+                <a
+                  href={site.social.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 text-red-300 text-xs font-semibold transition shadow-sm"
+                  title="Official YouTube @IEPSOLUTIONS"
+                >
+                  <Youtube className="h-3.5 w-3.5 text-red-400" />
+                  YouTube
+                </a>
+                <a
+                  href={site.social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 text-xs font-semibold transition shadow-sm"
+                  title="Official Facebook IEP Solutions"
+                >
+                  <Facebook className="h-3.5 w-3.5 text-blue-400" />
+                  Facebook
+                </a>
+                <a
+                  href={site.social.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-xs font-semibold transition shadow-sm"
+                  title="Official WhatsApp Desk"
+                >
+                  <MessageCircle className="h-3.5 w-3.5 text-emerald-400" />
+                  WhatsApp
+                </a>
+                <a
+                  href={site.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-sky-500/30 bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 text-xs font-semibold transition shadow-sm"
+                  title="Official LinkedIn IEP Solutions"
+                >
+                  <Linkedin className="h-3.5 w-3.5 text-sky-400" />
+                  LinkedIn
+                </a>
+                <a
+                  href={site.social.x}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-400/30 bg-slate-400/10 hover:bg-slate-400/20 text-slate-200 text-xs font-semibold transition shadow-sm"
+                  title="Official X @IEPSOLUTIONS7"
+                >
+                  <Twitter className="h-3.5 w-3.5 text-slate-300" />
+                  X (Twitter)
+                </a>
+              </div>
             </div>
           </div>
 
@@ -127,8 +207,63 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-white/65 transition-colors hover:text-white"
                 >
-                  <MessageCircle className="h-4 w-4 shrink-0 text-violet-300" />
+                  <MessageCircle className="h-4 w-4 shrink-0 text-emerald-400" />
                   Chat on WhatsApp
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-white/65 transition-colors hover:text-white"
+                >
+                  <Instagram className="h-4 w-4 shrink-0 text-pink-400" />
+                  Instagram: {site.social.instagramHandle}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.social.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-white/65 transition-colors hover:text-white"
+                >
+                  <Youtube className="h-4 w-4 shrink-0 text-red-400" />
+                  YouTube: {site.social.youtubeHandle}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-white/65 transition-colors hover:text-white"
+                >
+                  <Facebook className="h-4 w-4 shrink-0 text-blue-400" />
+                  Facebook: {site.social.facebookName}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-white/65 transition-colors hover:text-white"
+                >
+                  <Linkedin className="h-4 w-4 shrink-0 text-sky-400" />
+                  LinkedIn: {site.social.linkedinName}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.social.x}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-white/65 transition-colors hover:text-white"
+                >
+                  <Twitter className="h-4 w-4 shrink-0 text-slate-300" />
+                  X: {site.social.xHandle}
                 </a>
               </li>
               <li className="flex items-center gap-3 text-white/65">
@@ -144,7 +279,64 @@ export function Footer() {
             © {year} IEP Schools. All rights reserved. School data remains the
             property of the respective school.
           </p>
-          <p className="max-w-xl lg:text-right">
+          <div className="flex items-center gap-3">
+            <span className="text-[11px] text-white/40">Official:</span>
+            <a
+              href={site.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-pink-300 transition"
+              title="Instagram"
+            >
+              <Instagram className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href={site.social.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-red-300 transition"
+              title="YouTube"
+            >
+              <Youtube className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href={site.social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-blue-300 transition"
+              title="Facebook"
+            >
+              <Facebook className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href={site.social.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-emerald-300 transition"
+              title="WhatsApp"
+            >
+              <MessageCircle className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href={site.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-sky-300 transition"
+              title="LinkedIn"
+            >
+              <Linkedin className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href={site.social.x}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-slate-300 transition"
+              title="X (Twitter)"
+            >
+              <Twitter className="h-3.5 w-3.5" />
+            </a>
+          </div>
+          <p className="max-w-md lg:text-right">
             Enterprise-grade school automation engineered for Indian institutions. 99.98% cloud uptime SLA with ISO/IEC 27001 data protection standards.
           </p>
         </div>

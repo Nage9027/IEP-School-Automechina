@@ -154,6 +154,19 @@ export interface SiteInfo {
     whatsapp: string;
     location: string;
   };
+  social: {
+    instagram: string;
+    instagramHandle: string;
+    facebook: string;
+    facebookName: string;
+    youtube: string;
+    youtubeHandle: string;
+    linkedin: string;
+    linkedinName: string;
+    x: string;
+    xHandle: string;
+    whatsapp: string;
+  };
   erpLoginUrl: string;
   announcement: string;
   pricingDisclaimer: string;
@@ -178,6 +191,19 @@ export interface SiteOverrides {
     phoneDisplay?: string;
     whatsapp?: string;
     location?: string;
+  };
+  social?: {
+    instagram?: string;
+    instagramHandle?: string;
+    facebook?: string;
+    facebookName?: string;
+    youtube?: string;
+    youtubeHandle?: string;
+    linkedin?: string;
+    linkedinName?: string;
+    x?: string;
+    xHandle?: string;
+    whatsapp?: string;
   };
   pricing?: {
     annualMonths?: number;

@@ -89,6 +89,7 @@ function mergeContent(overrides: SiteOverrides | null): SiteContent {
   }
 
   const contact = overrides.contact ?? {};
+  const social = overrides.social ?? {};
   const site: SiteInfo = {
     ...defaultSite,
     announcement: text(overrides.announcement, defaultSite.announcement),
@@ -99,6 +100,19 @@ function mergeContent(overrides: SiteOverrides | null): SiteContent {
       phoneDisplay: text(contact.phoneDisplay, defaultSite.contact.phoneDisplay),
       whatsapp: text(contact.whatsapp, defaultSite.contact.whatsapp),
       location: text(contact.location, defaultSite.contact.location),
+    },
+    social: {
+      instagram: text(social.instagram, defaultSite.social.instagram),
+      instagramHandle: text(social.instagramHandle, defaultSite.social.instagramHandle),
+      facebook: text(social.facebook, defaultSite.social.facebook),
+      facebookName: text(social.facebookName, defaultSite.social.facebookName),
+      youtube: text(social.youtube, defaultSite.social.youtube),
+      youtubeHandle: text(social.youtubeHandle, defaultSite.social.youtubeHandle),
+      linkedin: text(social.linkedin, defaultSite.social.linkedin),
+      linkedinName: text(social.linkedinName, defaultSite.social.linkedinName),
+      x: text(social.x, defaultSite.social.x),
+      xHandle: text(social.xHandle, defaultSite.social.xHandle),
+      whatsapp: text(social.whatsapp, defaultSite.social.whatsapp),
     },
   };
 

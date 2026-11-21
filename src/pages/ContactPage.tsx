@@ -7,8 +7,11 @@ import {
   ChevronDown,
   Clock,
   ExternalLink,
+  Facebook,
   Filter,
   HelpCircle,
+  Instagram,
+  Linkedin,
   Loader2,
   LogIn,
   Mail,
@@ -18,6 +21,8 @@ import {
   Send,
   Server,
   ShieldCheck,
+  Twitter,
+  Youtube,
 } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -577,6 +582,181 @@ export default function ContactPage() {
                 <ExternalLink className="h-3.5 w-3.5" />
                 Open Portal
               </Button>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ========================================================
+          OFFICIAL SOCIAL MEDIA & COMMUNITY CHANNELS
+          ======================================================== */}
+      <Section tone="light" className="py-12 border-t border-b border-purple-100/60 bg-gradient-to-b from-purple-50/30 to-white">
+        <div className="container-x">
+          <div className="rounded-3xl border border-purple-100/80 bg-white p-7 sm:p-10 shadow-lg">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 border-b border-purple-100 pb-6 mb-8">
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-purple-100 text-purple-800 border border-purple-200">
+                  Verified Official Channels
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black text-navy-900 mt-2">
+                  Follow & Connect with IEP Solutions
+                </h3>
+                <p className="text-xs sm:text-sm text-ink/70 mt-1 max-w-xl">
+                  Stay updated on product announcements, new school automation features, video tutorials, and educational technology insights.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {/* Instagram */}
+              <a
+                href={site.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex flex-col justify-between rounded-2xl border border-pink-100 bg-gradient-to-b from-white to-pink-50/20 p-5 shadow-sm transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 hover:border-pink-300"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-tr from-amber-500 via-pink-500 to-purple-600 text-white shadow-sm">
+                      <Instagram className="h-5 w-5" />
+                    </span>
+                    <ExternalLink className="h-4 w-4 text-slate-300 group-hover:text-pink-600 transition" />
+                  </div>
+                  <h4 className="mt-4 text-sm font-bold text-navy-900">Instagram</h4>
+                  <p className="text-xs font-mono font-semibold text-pink-600 mt-0.5">{site.social.instagramHandle}</p>
+                  <p className="mt-2 text-xs text-ink/65 leading-relaxed">
+                    Product reels, quick tips, school highlights, and campus transformation stories.
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-pink-600 group-hover:underline">
+                  Follow on Instagram <ArrowRight className="h-3 w-3" />
+                </span>
+              </a>
+
+              {/* YouTube */}
+              <a
+                href={site.social.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex flex-col justify-between rounded-2xl border border-red-100 bg-gradient-to-b from-white to-red-50/20 p-5 shadow-sm transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 hover:border-red-300"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-red-600 text-white shadow-sm">
+                      <Youtube className="h-5 w-5" />
+                    </span>
+                    <ExternalLink className="h-4 w-4 text-slate-300 group-hover:text-red-600 transition" />
+                  </div>
+                  <h4 className="mt-4 text-sm font-bold text-navy-900">YouTube Channel</h4>
+                  <p className="text-xs font-mono font-semibold text-red-600 mt-0.5">{site.social.youtubeHandle}</p>
+                  <p className="mt-2 text-xs text-ink/65 leading-relaxed">
+                    Complete ERP video walkthroughs, role guides, setup tutorials, and feature deep dives.
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-red-600 group-hover:underline">
+                  Subscribe on YouTube <ArrowRight className="h-3 w-3" />
+                </span>
+              </a>
+
+              {/* Facebook */}
+              <a
+                href={site.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex flex-col justify-between rounded-2xl border border-blue-100 bg-gradient-to-b from-white to-blue-50/20 p-5 shadow-sm transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 hover:border-blue-300"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-blue-600 text-white shadow-sm">
+                      <Facebook className="h-5 w-5" />
+                    </span>
+                    <ExternalLink className="h-4 w-4 text-slate-300 group-hover:text-blue-600 transition" />
+                  </div>
+                  <h4 className="mt-4 text-sm font-bold text-navy-900">Facebook Page</h4>
+                  <p className="text-xs font-semibold text-blue-600 mt-0.5">{site.social.facebookName}</p>
+                  <p className="mt-2 text-xs text-ink/65 leading-relaxed">
+                    Official announcements, community discussions, and school automation news.
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-blue-600 group-hover:underline">
+                  Join Community <ArrowRight className="h-3 w-3" />
+                </span>
+              </a>
+
+              {/* LinkedIn */}
+              <a
+                href={site.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex flex-col justify-between rounded-2xl border border-sky-100 bg-gradient-to-b from-white to-sky-50/20 p-5 shadow-sm transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 hover:border-sky-300"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#0077b5] text-white shadow-sm">
+                      <Linkedin className="h-5 w-5" />
+                    </span>
+                    <ExternalLink className="h-4 w-4 text-slate-300 group-hover:text-sky-600 transition" />
+                  </div>
+                  <h4 className="mt-4 text-sm font-bold text-navy-900">LinkedIn</h4>
+                  <p className="text-xs font-semibold text-sky-600 mt-0.5">{site.social.linkedinName}</p>
+                  <p className="mt-2 text-xs text-ink/65 leading-relaxed">
+                    Professional updates, company milestones, leadership posts, and institutional partnerships.
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-sky-600 group-hover:underline">
+                  Connect on LinkedIn <ArrowRight className="h-3 w-3" />
+                </span>
+              </a>
+
+              {/* X (formerly Twitter) */}
+              <a
+                href={site.social.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex flex-col justify-between rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50/40 p-5 shadow-sm transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 hover:border-slate-400"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-slate-900 text-white shadow-sm">
+                      <Twitter className="h-5 w-5" />
+                    </span>
+                    <ExternalLink className="h-4 w-4 text-slate-300 group-hover:text-slate-900 transition" />
+                  </div>
+                  <h4 className="mt-4 text-sm font-bold text-navy-900">X (Twitter)</h4>
+                  <p className="text-xs font-mono font-semibold text-slate-700 mt-0.5">{site.social.xHandle}</p>
+                  <p className="mt-2 text-xs text-ink/65 leading-relaxed">
+                    Real-time updates, product release notes, live school tech support, and EdTech conversations.
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-slate-900 group-hover:underline">
+                  Follow @IEPSOLUTIONS7 <ArrowRight className="h-3 w-3" />
+                </span>
+              </a>
+
+              {/* WhatsApp Helpdesk */}
+              <a
+                href={site.social.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex flex-col justify-between rounded-2xl border border-emerald-100 bg-gradient-to-b from-white to-emerald-50/20 p-5 shadow-sm transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 hover:border-emerald-300"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-600 text-white shadow-sm">
+                      <MessageCircle className="h-5 w-5" />
+                    </span>
+                    <ExternalLink className="h-4 w-4 text-slate-300 group-hover:text-emerald-600 transition" />
+                  </div>
+                  <h4 className="mt-4 text-sm font-bold text-navy-900">WhatsApp Desk</h4>
+                  <p className="text-xs font-mono font-semibold text-emerald-600 mt-0.5">{site.contact.phoneDisplay}</p>
+                  <p className="mt-2 text-xs text-ink/65 leading-relaxed">
+                    Instant chat with our education onboarding team for demos and pricing queries.
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-emerald-600 group-hover:underline">
+                  Chat on WhatsApp <ArrowRight className="h-3 w-3" />
+                </span>
+              </a>
             </div>
           </div>
         </div>
